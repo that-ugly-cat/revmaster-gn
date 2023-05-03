@@ -103,9 +103,8 @@ else:
     # Configure AgGrid options
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_selection('single')
-    gb.configure_grid_options(headerHeight=30,rowHeight=30)
     ag = AgGrid(df,
-                height = 50,
+                height = 200,
                 gridOptions=gb.build())
     return ag
   ####################################
