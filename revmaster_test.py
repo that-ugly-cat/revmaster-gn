@@ -27,7 +27,7 @@ if 'initial_config.py' not in config_files:
         l1 = 'project_title = ' + project_title + '\n'
         l2 = 'project_description = ' + project_description + '\n'
         criteria = criteria.split('\n')
-        critlist = '['
+        critlist = 'criteria = ['
         for criterion in criteria:
           critlist = critlist + '\'' + criterion + '\', '
         critlist = critlist + ']'  
