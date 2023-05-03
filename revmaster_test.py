@@ -50,10 +50,10 @@ if 'initial_config.py' not in config_files:
         lines = test_read.readlines()
         for line in lines:
           st.write(line)
-      user = st.secrets['github_user']
-      token = st.secrets['github_token']
-      repo = st.secrets['github_repo']
-      gitpush.git_save('initial_config.py', user, token, repo)
+        user = st.secrets['github_user']
+        token = st.secrets['github_token']
+        repo = st.secrets['github_repo']
+        gitpush.git_save('initial_config.py', user, token, repo)
 
 else:
   st.text('...')
