@@ -209,17 +209,36 @@ else:
           doc_ref = db.collection(initial_config.firestore_collection).document(paper_key)
           doc = doc_ref.get()
           st.subheader("Assessment")
+          ## Include?
           try:
             option = include_options.index(doc.include)
             include_widget = st.radio('Include?', include_options, index = option)
           except:
             include_widget = st.radio('Include?', include_options)
-          study_country = st.multiselect('Country', country_options)
+          ## Country
+          try:
+            study_country = st.multiselect('Country', country_options)
+          except:
+            study_country = st.multiselect('Country', country_options)
+          # Year
           try:
             study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
           except: 
             study_year_value = 0
             study_year = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
+          # Study type
+          
+          # Methodology
+          
+          # Assessment criteria
+          
+          for criterion in initial_config.criteria:
+            try:
+              criterion_text = include_options.index(doc.criterion)
+              criterion_widget = st.text_area(criterion, criterion_text)
+            except:
+              criterion_text = ''
+              criterion_widget = st.text_area(criterion, criterion_text)
           save_assessment = st.form_submit_button("Save")
         if save_assessment:
           doc.update({include: include_widget})
