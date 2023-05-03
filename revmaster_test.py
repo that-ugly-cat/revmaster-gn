@@ -21,12 +21,14 @@ if 'initial_config.py' not in config_files:
       save_1 = st.form_submit_button("Save")
     if save_1:
       st.write(project_title, project_description)
-  with st.expander('Assessment criteria', expanded = True):
-    with st.form("form_2"):
-      criteria = st.text_area('Assessment criteria', 'one\nper\nline')
-      save_2 = st.form_submit_button("Save")
-    if save_2:
-      st.write(criteria)    
+      with st.expander('Assessment criteria', expanded = True):
+        with st.form("form_2"):
+          criteria = st.text_area('Assessment criteria', 'one\nper\nline')
+          save_2 = st.form_submit_button("Save")
+        if save_2:
+          st.write(criteria)
+          with f = open('configs/initial_config.py'):
+            f.write('project_title = ' + project_title)
 
 else:
   st.text('...')
