@@ -252,6 +252,8 @@ else:
   ## tab 3 (authors)
   with tab3:
     authorlist = []
-    for x in papers_df['Author'].values.tolist():
-      authorlist.append(x)
-      st.text(authorlist)
+    for author_block in papers_df['Author'].values.tolist():
+      authors = author_block.split(';')
+      for author in authors:
+        authorlist.append(author)
+    st.text(authorlist)
