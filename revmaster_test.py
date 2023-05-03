@@ -110,7 +110,7 @@ else:
     return ag
   ####################################
   # Tabs
-  tab1, tab2, tab3, tab4 = st.tabs(["Assessment", 'Papers per year', 'Authors', 'Lemmas'])
+  tab1, tab2, tab3, tab4 = st.tabs(["Assessment", 'Papers per year', 'Authors', 'Lemmas', 'DOI', 'Url', 'Manual Tags', 'Automatic Tags'])
   ## tab 1 (assessment)
   with tab1:
     # Main area (paper table)
