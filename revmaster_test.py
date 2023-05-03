@@ -90,7 +90,7 @@ else:
   papers = list(db.collection(initial_config.firestore_collection).stream())
   papers_dict = list(map(lambda x: x.to_dict(), papers))
   papers_df = pd.DataFrame(papers_dict)
-  papers_df = papers_df[['Key', 'Author', 'Publication Year', 'Title', 'DOI', 'Url', 'Manual Tags', 'Automatic Tags']]
+  papers_df = papers_df[['Key', 'Author', 'Publication Year', 'Title', 'Abstract Note', 'DOI', 'Url', 'Manual Tags']]
   ####################################functions
   ## show papers
   def show_pdf(file_path):
