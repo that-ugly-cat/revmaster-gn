@@ -210,7 +210,7 @@ else:
           include = st.radio('Include?', include_options)
           study_country = st.multiselect('Country', country_options)
           try:
-            study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year_revmaster'].values[0])
+            study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
           except: 
             study_year_value = 0
             study_year = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
