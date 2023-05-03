@@ -88,9 +88,9 @@ else:
   # load include options
   try:
     f = open("configs/include_options.txt", "r")
-    country_options = f.readlines()
+    include_options = f.readlines()
   except:
-     st.error("Oops! There is something wrong with your country options file.\nThe file must be called \'country_options.txt\' and contain one country per row.")
+     st.error("Oops! There is something wrong with your include options file.\nThe file must be called \'include_options.txt\' and contain one option per row.")
   
   ###
   papers = list(db.collection(initial_config.firestore_collection).stream())
