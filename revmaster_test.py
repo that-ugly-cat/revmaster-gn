@@ -99,12 +99,13 @@ else:
     st.markdown(pdf_display, unsafe_allow_html=True)
 
   ## aggrid table
-  def display_table(df: pd.DataFrame) -> AgGrid:
+  def display_table(df):
     # Configure AgGrid options
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_selection('single')
+    gb.configure_grid_options(headerHeight=30,rowHeight=30)
     ag = AgGrid(dataframe = df,
-                height = 200,
+                height = 50,
                 gridOptions=gb.build())
     return ag
   ####################################
