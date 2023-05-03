@@ -209,8 +209,11 @@ else:
           doc_ref = db.collection(initial_config.firestore_collection).document(paper_key)
           doc = doc_ref.get()
           st.subheader("Assessment")
-          st.write(doc.include)
-          include = st.radio('Include?', include_options)
+          try:
+            option = include_options.(doc.include)
+            include = st.radio('Include?', include_options, index = option)
+          except:
+            include = st.radio('Include?', include_options)
           study_country = st.multiselect('Country', country_options)
           try:
             study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
