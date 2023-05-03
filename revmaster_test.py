@@ -33,7 +33,8 @@ if 'initial_config.py' not in config_files:
           if criterion != last_item:
             critlist = critlist + '\'' + criterion + '\', '
           if criterion == last_item:
-            critlist = critlist + '\'' + criterion + '\']'
+            critlist = critlist + '\'' + criterion + '\''
+            critlist = critlist + ']'
         l3 = critlist
         f.writelines([l1, l2, l3])
       test_read = open('configs/initial_config.py', 'r')
@@ -45,4 +46,8 @@ if 'initial_config.py' not in config_files:
 
 else:
   st.text('...')
+  test_read = open('configs/initial_config.py', 'r')
+  lines = test_read.readlines()
+  for line in lines:
+    st.write(line)
 
