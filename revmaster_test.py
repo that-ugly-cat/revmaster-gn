@@ -145,4 +145,59 @@ else:
     for x in authorlist:
       surname = x.split(',')
       names_for_file.append(surname[0].strip())
+    # Finding pdfs
+    ####################################
+    ## here I apply a rule to determine how many author surnames are used in the filename.
+    names_for_file_parsed = []
+    if len(names_for_file) == 1:
+      names_for_file_parsed.append(names_for_file[0])
+    if len(names_for_file) == 2:
+      names_for_file_parsed.append(names_for_file[0])
+      names_for_file_parsed.append(', ')
+      names_for_file_parsed.append(names_for_file[1])
+    if len(names_for_file) > 2:
+      names_for_file_parsed.append(names_for_file[0])
+      names_for_file_parsed.append(', ')
+      names_for_file_parsed.append(names_for_file[1])
+      names_for_file_parsed.append(' et al')
+    names_for_file_string = ''.join(names_for_file_parsed)
+    auth_and_year = names_for_file_string + ', ' + str(year)
+    st.text(auth_and_year)
 
+    probable_files = []
+    for file in os.listdir('pdfs'):
+      if file.find(names_for_file_string)!= -1:
+          probable_files.append(file)
+
+    # here we specify which file to serve
+    if len(probable_files) == 0:
+      pdf_file = 'base_pdfs/dang.pdf'
+    if len(probable_files) == 1:
+      pdf_file = 'pdfs/' + probable_files[0]
+    if len(probable_files) > 1:
+      probable_files_title = []
+      title_as_list = title.split(' ')
+      first_words = title_as_list[0:2]
+      first_words= ' '.join(first_words)
+      for file in probable_files:
+        if file.find(first_words)!= -1:
+          probable_files_title.append(file)
+        if len(probable_files_title) == 0:
+          pdf_file = 'base_pdfs/dang.pdf'
+        if len(probable_files_title) == 1:
+          pdf_file = 'pdfs/' + probable_files_title[0]
+        if len(probable_files_title) > 1:
+          pdf_file = 'base_pdfs/doubledang.pdf'
+        st.text(probable_files_title)
+    #####################################
+
+    # Display PDF and assessment fields
+    ####################################
+    with st.container():
+      col1, col2 = st.columns([3, 1])
+      with col1:
+        st.subheader("Paper")
+        show_pdf(pdf_file)
+      with col2:
+        st.subheader("Assessment")
+        st.subheader('Include?')
