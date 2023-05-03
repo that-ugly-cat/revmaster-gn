@@ -31,7 +31,7 @@ if 'initial_config.py' not in config_files:
         for criterion in criteria:
           critlist = critlist + '\'' + criterion + '\', '
         critlist = critlist + ']'  
-        l3 = 'criteria = ' + criteria + '\n'
+        l3 = critlist
         f.writelines([l1, l2, l3])
       test_read = open('configs/initial_config.py', 'r')
       lines = test_read.readlines()
