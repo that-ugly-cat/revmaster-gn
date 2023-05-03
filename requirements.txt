@@ -6,3 +6,4 @@ streamlit-aggrid
 supabase
 requests
 mysql-connector-python
+google-cloud-firestore
