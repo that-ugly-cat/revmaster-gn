@@ -246,4 +246,5 @@ else:
   ## tab 2 (papers per year)
   with tab2:
     data = papers_df['Publication Year'].value_counts()
+    data = data.sort_values('Publication year')
     st.write(data)
