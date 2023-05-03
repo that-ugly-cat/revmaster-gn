@@ -207,8 +207,7 @@ else:
       with col2:
         with st.form("assessment_form"):
           st.subheader("Assessment")
-          st.subheader('Include?')
-          include = st.radio('Include', include_options, label_visibility = 'hidden')
+          include = st.radio('Include?', include_options)
           study_country = st.multiselect('Country', country_options)
           try:
             study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year_revmaster'].values[0])
