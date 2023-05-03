@@ -208,7 +208,6 @@ else:
         with st.form("assessment_form"):
           doc_ref = db.collection(initial_config.firestore_collection).document(paper_key)
           doc = doc_ref.get()
-          st.write(doc.to_dict())
           st.subheader("Assessment")
           try:
             option = include_options.index(doc.include)
