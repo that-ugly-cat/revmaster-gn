@@ -51,9 +51,11 @@ if 'initial_config.py' not in config_files:
           f.writelines([l1, l2, l3])'''
         ###
         df_as_dict = papers_df.to_dict('index')
-        for key, item in df_as_dict.items():
-          doc_ref = db.collection('papers').document(item['Key'])
-          doc_ref.set(item)
+        with st.spinner('Wait for it...'):
+          for key, item in df_as_dict.items():
+            doc_ref = db.collection('papers').document(item['Key'])
+            doc_ref.set(item)
+        st.success('Done!')
         ###
         '''test_read = open('initial_config.py', 'r')
         lines = test_read.readlines()
