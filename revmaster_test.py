@@ -10,7 +10,7 @@ import gitpush
 ####################################
 st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
 
-config_files = os.listdir('configs')
+config_files = os.listdir('')
 
 st.text(config_files)
 if 'initial_config.py' not in config_files:
