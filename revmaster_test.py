@@ -211,6 +211,8 @@ else:
           st.subheader("Assessment")
           try:
             option = include_options.index(doc.include)
+            st.write(doc.include)
+            st.write(option)
             include = st.radio('Include?', include_options, index = option)
           except:
             include = st.radio('Include?', include_options)
