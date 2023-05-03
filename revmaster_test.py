@@ -55,7 +55,7 @@ if 'initial_config.py' not in config_files:
             if criterion == last_item:
               critlist = critlist + '\'' + criterion + '\']\n'
           l3 = critlist
-          l4 = 'firestore_collection = '\'' + firestore_collection + '\'\n'
+          l4 = 'firestore_collection = \'' + firestore_collection + '\'\n'
           f.writelines([l1, l2, l3, l4])
         ###
         df_as_dict = papers_df.to_dict('index')
