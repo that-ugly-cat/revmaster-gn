@@ -247,6 +247,5 @@ else:
   with tab2:
     data = papers_df['Publication Year'].value_counts().rename_axis('Year').to_frame('counts')
     data = data.sort_values('Year')
-    data['Year'] = data['Year'].astype('int')
     st.line_chart(data)
     st.write(data)
