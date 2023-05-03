@@ -7,3 +7,5 @@ supabase
 requests
 mysql-connector-python
 google-cloud-firestore
+wordcloud
+matplotlib
