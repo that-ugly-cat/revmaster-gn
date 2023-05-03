@@ -54,7 +54,11 @@ if 'initial_config.py' not in config_files:
             if criterion == last_item:
               critlist = critlist + '\'' + criterion + '\']'
           l3 = critlist
-          f.writelines([l1, l2, l3])
+          l4 = 'db_host = ' + db_host
+          l5 = 'db_user = ' + db_user
+          l6 = 'db_password = ' + db_password
+          l7 = 'db_database = ' + db_database
+          f.writelines([l1, l2, l3, l4, l5, l6, l7])
         test_read = open('initial_config.py', 'r')
         lines = test_read.readlines()
         for line in lines:
