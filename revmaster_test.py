@@ -90,6 +90,7 @@ else:
   papers = list(db.collection(initial_config.firestore_collection).stream())
   papers_dict = list(map(lambda x: x.to_dict(), papers))
   papers_df = pd.DataFrame(papers_dict)
+  papers_df = papers_df['Key', 'Author', 'Publication Year', 'Title']
   ####################################functions
   ## show papers
   def show_pdf(file_path):
@@ -104,7 +105,7 @@ else:
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_selection('single')
     ag = AgGrid(df,
-                height = 200,
+                height = 500,
                 gridOptions=gb.build())
     return ag
   ####################################
