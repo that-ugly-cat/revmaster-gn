@@ -29,7 +29,7 @@ if 'initial_config.py' not in config_files:
       if uploaded_file is not None:
         dataframe = pd.read_csv(uploaded_file)
         st.write(dataframe)
-      save_1 = st.form_submit_button("Save")
+    save_1 = st.form_submit_button("Save")
 
     if save_1:
       with open('configs/initial_config.py', 'w') as f:
