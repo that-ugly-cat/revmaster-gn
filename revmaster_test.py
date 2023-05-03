@@ -29,26 +29,26 @@ if 'initial_config.py' not in config_files:
       if uploaded_file is not None:
         dataframe = pd.read_csv(uploaded_file)
         st.write(dataframe)
-    save_1 = st.form_submit_button("Save")
+      save_1 = st.form_submit_button("Save")
 
-    if save_1:
-      with open('configs/initial_config.py', 'w') as f:
-        l1 = 'project_title = \'' + project_title + '\'\n'
-        l2 = 'project_description = \'' + project_description + '\'\n'
-        criteria = criteria.split('\n')
-        critlist = 'criteria = ['
-        last_item = criteria[-1]
-        for criterion in criteria:
-          if criterion != last_item:
-            critlist = critlist + '\'' + criterion + '\', '
-          if criterion == last_item:
-            critlist = critlist + '\'' + criterion + '\']'
-        l3 = critlist
-        f.writelines([l1, l2, l3])
-      test_read = open('configs/initial_config.py', 'r')
-      lines = test_read.readlines()
-      for line in lines:
-        st.write(line)
+      if save_1:
+        with open('configs/initial_config.py', 'w') as f:
+          l1 = 'project_title = \'' + project_title + '\'\n'
+          l2 = 'project_description = \'' + project_description + '\'\n'
+          criteria = criteria.split('\n')
+          critlist = 'criteria = ['
+          last_item = criteria[-1]
+          for criterion in criteria:
+            if criterion != last_item:
+              critlist = critlist + '\'' + criterion + '\', '
+            if criterion == last_item:
+              critlist = critlist + '\'' + criterion + '\']'
+          l3 = critlist
+          f.writelines([l1, l2, l3])
+        test_read = open('configs/initial_config.py', 'r')
+        lines = test_read.readlines()
+        for line in lines:
+          st.write(line)
       
       
 
