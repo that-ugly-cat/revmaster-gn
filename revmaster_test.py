@@ -26,8 +26,9 @@ if 'initial_config.py' not in config_files:
       st.text('Upload the CSV file containing your papers to be assessed.\nThe file should contain the following columns: ...')
       uploaded_file = st.file_uploader("Choose a file")
       if uploaded_file is not None:
-        dataframe = pd.read_csv(uploaded_file)
-        st.write(dataframe)
+        papers_df = pd.read_csv(uploaded_file)
+        st.write(papers_df)
+        st.write(papers_df.columns.values.tolist())
       save_1 = st.form_submit_button("Save")
 
       if save_1:
