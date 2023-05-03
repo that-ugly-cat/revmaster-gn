@@ -5,3 +5,4 @@ pybase64
 streamlit-aggrid
 supabase
 requests
+mysql-connector-python
