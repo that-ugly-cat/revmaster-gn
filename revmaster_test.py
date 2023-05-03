@@ -75,13 +75,20 @@ else:
   st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
   st.header(initial_config.project_title)
   st.text(initial_config.project_description)
+  ###
+  import base64
+  from st_aggrid import AgGrid, GridOptionsBuilder
+  ###
+  # load country options
+  try:
+    f = open("configs/country_options.txt", "r")
+    country_options = f.readlines()
+  except:
+     st.error("Oops! There is something wrong with your country options file.\nThe file must be called \'country_options.txt\' and contain one country per row.")
   
-  # Authenticate to Firestore with the JSON account key.
-  
-  # Create a reference to the Google post.
-  doc_ref = db.collection("papers").document("2949NCNW")
-  doc = doc_ref.get()
-  # Let's see what we got!
-  st.write("The id is: ", doc.id)
-  st.write("The contents are: ", doc.to_dict())
+  ###
+  papers = list(db.collection(initial_config.firestore_collection).stream())
+  papers_dict = list(map(lambda x: x.to_dict(), papers))
+  papers_df = pd.DataFrame(papers_dict)
+  st.write(papers_df)
 
