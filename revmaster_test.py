@@ -52,7 +52,7 @@ if 'initial_config.py' not in config_files:
         ###
         df_as_dict = papers_df.to_dict('index')
         for key, item in df_as_dict.items():
-          doc_ref = db.collection('papers').document(key)
+          doc_ref = db.collection('papers').document(item['Key'])
           doc_ref.set(item)
         ###
         '''test_read = open('initial_config.py', 'r')
