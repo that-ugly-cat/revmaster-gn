@@ -27,9 +27,7 @@ if 'initial_config.py' not in config_files:
       uploaded_file = st.file_uploader("Choose a file")
       if uploaded_file is not None:
         papers_df = pd.read_csv(uploaded_file)
-        st.write(len(papers_df))
-        st.write(type(papers_df))
-        st.write(papers_df.columns.values.tolist())
+        st.write(papers_df)
       save_1 = st.form_submit_button("Save")
 
       if save_1:
