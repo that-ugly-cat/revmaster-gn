@@ -250,7 +250,7 @@ else:
     st.line_chart(data)
     st.write(data)
   ## tab 3 (authors)
-  with tab2:
+  with tab3:
     authorlist = []
     for x in papers_df['Author'].values.tolist():
       authorlist.append(x)
