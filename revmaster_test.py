@@ -39,8 +39,8 @@ if 'initial_config.py' not in config_files:
       if uploaded_file is not None:
         papers_df = pd.read_csv(uploaded_file)
         st.write(papers_df)
+      ###
       save_1 = st.form_submit_button("Save")
-
       if save_1:
         with open('initial_config.py', 'w') as f:
           l1 = 'project_title = \'' + project_title + '\'\n'
@@ -59,6 +59,17 @@ if 'initial_config.py' not in config_files:
           l6 = 'db_password = \'' + db_password + '\'\n'
           l7 = 'db_database = \'' + db_database + '\'\n'
           f.writelines([l1, l2, l3, l4, l5, l6, l7])
+        ###
+        mydb = mysql.connector.connect(
+          host = db_host,
+          user = db_user,
+          password = db_password,
+          database=db_database)
+        mycursor = mydb.cursor()
+        mycursor.execute("SHOW TABLES")
+        for x in mycursor:
+        st.write(x)
+        ###
         test_read = open('initial_config.py', 'r')
         lines = test_read.readlines()
         for line in lines:
