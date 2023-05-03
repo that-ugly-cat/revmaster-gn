@@ -25,10 +25,10 @@ if 'initial_config.py' not in config_files:
       st.divider()
       st.text('Upload the CSV file containing your papers to be assessed.\nThe file should contain the following columns: ...')
       uploaded_file = st.file_uploader("Choose a file")
-      show_data = st.button("Show data")
-      if uploaded_file is not None:
-        dataframe = pd.read_csv(uploaded_file)
-        st.write(dataframe)
+      if st.button("Show data"):
+        if uploaded_file is not None:
+          dataframe = pd.read_csv(uploaded_file)
+          st.write(dataframe)
       save_1 = st.form_submit_button("Save")
 
       if save_1:
