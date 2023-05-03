@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from io import StringIO
 import base64
 from st_aggrid import AgGrid, GridOptionsBuilder
 import os
@@ -19,7 +20,14 @@ if 'initial_config.py' not in config_files:
     with st.form("form_1"):
       project_title = st.text_input('Project title', '...')
       project_description = st.text_area('Project description', '...')
+      st.divider()
       criteria = st.text_area('Assessment criteria', 'one\nper\nline')
+      st.divider()
+      st.text('Upload the CSV file containing your papers to be assessed.\nThe file should contain the following columns: ...')
+      uploaded_file = st.file_uploader("Choose a file")
+      if uploaded_file is not None:
+        dataframe = pd.read_csv(uploaded_file)
+        st.write(dataframe)
       save_1 = st.form_submit_button("Save")
     if save_1:
       with open('configs/initial_config.py', 'w') as f:
