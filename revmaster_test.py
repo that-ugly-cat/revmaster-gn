@@ -51,7 +51,7 @@ if 'initial_config.py' not in config_files:
           f.writelines([l1, l2, l3])'''
         ###
         df_as_dict = papers_df.to_dict('index')
-        for key, item in df_as_dict:
+        for key, item in df_as_dict.items():
           st.write(item)
           st.text(type(item))
         ###
