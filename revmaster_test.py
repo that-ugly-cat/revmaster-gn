@@ -18,10 +18,11 @@ if 'initial_config.py' not in config_files:
   st.set_page_config(page_title = 'RevMaster', 
                      page_icon = ':books:', 
                      layout = 'centered', 
-                     menu_items={'Get Help': 'Coming soon...',
-                                 'Report a bug': "spit@giovannispitale.net",
+                     menu_items={'Get Help': 'https://www.giovannispitale.net',
+                                 'Report a bug': "https://www.giovannispitale.net",
                                  'About': "# RevMaster v0.1. This is an *extremely* cool app for conducting literature reviews."})
-  st.header('No configuration found.')
+  st.header('RevMaster setup')
+  st.subheader('No configuration found.')
   st.subheader('Let\'s set up a new project')
   with st.expander('Title and description', expanded = True):
     with st.form("form_1"):
@@ -74,17 +75,15 @@ if 'initial_config.py' not in config_files:
         gitpush.git_save('initial_config.py', user, token, repo)'''
 
 else:
+  import initial_config
   st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
-  st.text('...')
-  test_read = open('initial_config.py', 'r')
-  lines = test_read.readlines()
-  for line in lines:
-    st.write(line)
+  st.header(initial_config.project_title)
+  st.text(initial_config.project_description)
   
   # Authenticate to Firestore with the JSON account key.
   
   # Create a reference to the Google post.
-  doc_ref = db.collection("papers").document("a paper")
+  doc_ref = db.collection("papers").document("2949NCNW")
   doc = doc_ref.get()
   # Let's see what we got!
   st.write("The id is: ", doc.id)
