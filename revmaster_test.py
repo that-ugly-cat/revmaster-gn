@@ -5,11 +5,12 @@ import base64
 from st_aggrid import AgGrid, GridOptionsBuilder
 import os
 import gitpush
-import mysql.connector
+from google.cloud import firestore
 
 # Initial configurations
 ####################################
 st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
+db = firestore.Client.from_service_account_json("firestore-key.json")
 
 config_files = os.listdir('.')
 
@@ -50,7 +51,7 @@ if 'initial_config.py' not in config_files:
           f.writelines([l1, l2, l3])'''
         ###
         out = papers_df.to_dict()
-        firebase.post("/testupdate", out)
+        db.post("/testupdate", out)
         ###
         '''test_read = open('initial_config.py', 'r')
         lines = test_read.readlines()
@@ -67,9 +68,9 @@ else:
   lines = test_read.readlines()
   for line in lines:
     st.write(line)
-  from google.cloud import firestore
+  
   # Authenticate to Firestore with the JSON account key.
-  db = firestore.Client.from_service_account_json("firestore-key.json")
+  
   # Create a reference to the Google post.
   doc_ref = db.collection("papers").document("a paper")
   doc = doc_ref.get()
