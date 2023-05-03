@@ -90,5 +90,58 @@ else:
   papers = list(db.collection(initial_config.firestore_collection).stream())
   papers_dict = list(map(lambda x: x.to_dict(), papers))
   papers_df = pd.DataFrame(papers_dict)
-  st.write(papers_df)
+  ####################################functions
+  ## show papers
+  def show_pdf(file_path):
+    with open(file_path,"rb") as f:
+      base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+    pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width = 100% height="1500" type="application/pdf"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
+
+  ## aggrid table
+  def display_table(df: pd.DataFrame) -> AgGrid:
+    # Configure AgGrid options
+    gb = GridOptionsBuilder.from_dataframe(df)
+    gb.configure_selection('single')
+    return AgGrid(
+      df,
+      gridOptions=gb.build()
+      )
+  ####################################
+  # Tabs
+  tab1, tab2, tab3, tab4 = st.tabs(["Assessment", 'Papers per year', 'Authors', 'Lemmas'])
+  ## tab 1 (assessment)
+  with tab1:
+    # Main area (paper table)
+    ####################################
+    # see: https://discuss.streamlit.io/t/ag-grid-component-with-input-support/8108/242
+    paper = display_table(papers_df)
+    try: 
+      paper_key = (paper['selected_rows'][0]['Key'])
+      idx = papers_df[papers_df['Key']== paper_key].index.item()
+    except: 
+      paper_key = papers_df.iloc[0]['Key']
+      idx = papers_df[papers_df['Key']== paper_key].index.item()
+
+    try:
+      # build file name
+      ## Author
+      authors = papers_df[papers_df['Key'] == paper_key]['Author'].values[0]
+
+      ## Title
+      title = papers_df[papers_df['Key'] == paper_key]['Title'].values[0]
+      show_title = st.subheader(title)
+
+      ## Year
+      year = papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0]
+      year = int(year)
+
+    except:
+      st.text('Select a paper to start the assessment')
+
+    names_for_file = []
+    authorlist = authors.split(';')
+    for x in authorlist:
+      surname = x.split(',')
+      names_for_file.append(surname[0].strip())
 
