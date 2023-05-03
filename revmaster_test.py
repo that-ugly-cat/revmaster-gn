@@ -22,7 +22,7 @@ if 'initial_config.py' not in config_files:
       save_1 = st.form_submit_button("Save")
     if save_1:
       st.write(project_title, project_description)
-      with open('configs/initial_config.py', w) as f:
+      with open('configs/initial_config.py', 'w') as f:
         l1 = 'project_title = ' + project_title + '\n'
         l2 = 'project_description = ' + project_description + '\n'
         l3 = 'criteria = ' + criteria + '\n'
