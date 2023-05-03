@@ -32,5 +32,4 @@ if 'initial_config.py' not in config_files:
 
 else:
   st.text('...')
-st.write(project_title, project_description)
-st.text(criteria)   
+
