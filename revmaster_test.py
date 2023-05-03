@@ -249,3 +249,8 @@ else:
     data = data.sort_values('Year')
     st.line_chart(data)
     st.write(data)
+  ## tab 3 (authors)
+  with tab2:
+    authorlist = []
+    for x in papers_df['author']:
+      st.text(x)
