@@ -5,6 +5,7 @@ import base64
 from st_aggrid import AgGrid, GridOptionsBuilder
 import os
 import gitpush
+import mysql.connector
 
 # Initial configurations
 ####################################
@@ -24,7 +25,8 @@ if 'initial_config.py' not in config_files:
       criteria = st.text_area('Assessment criteria', 'one\nper\nline')
       st.divider()
       st.subheader('Upload the CSV file containing your papers to be assessed.')
-      st.text('The file should contain at least the following columns to function properly: Key (unique identifier), Publication Year, Author, Title')
+      st.text('The file should contain at least the following columns to function properly: Key (unique identifier), Publication Year, Author, Title.')
+      st.text('The code is tested and optimized for Zotero collection exports.')
       uploaded_file = st.file_uploader("Choose a file")
       if uploaded_file is not None:
         papers_df = pd.read_csv(uploaded_file)
