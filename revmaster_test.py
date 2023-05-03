@@ -51,7 +51,9 @@ if 'initial_config.py' not in config_files:
           f.writelines([l1, l2, l3])'''
         ###
         out = papers_df.to_dict()
-        db.post("/testupdate", out)
+        for x in out:
+          st.write(x)
+          st.write(type(x))
         ###
         '''test_read = open('initial_config.py', 'r')
         lines = test_read.readlines()
