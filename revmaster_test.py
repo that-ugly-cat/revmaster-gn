@@ -9,13 +9,18 @@ from google.cloud import firestore
 
 # Initial configurations
 ####################################
-st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
+
 db = firestore.Client.from_service_account_json("firestore-key.json")
 
 config_files = os.listdir('.')
 
-st.text(config_files)
 if 'initial_config.py' not in config_files:
+  st.set_page_config(page_title = 'RevMaster', 
+                     page_icon = ':books:', 
+                     layout = 'centered', 
+                     menu_items={'Get Help': 'https://www.extremelycoolapp.com/help',
+                                 'Report a bug': "https://www.extremelycoolapp.com/bug",
+                                 'About': "# This is a header. This is an *extremely* cool app!")
   st.header('No configuration found.')
   st.subheader('Let\'s set up a new project')
   with st.expander('Title and description', expanded = True):
@@ -69,6 +74,7 @@ if 'initial_config.py' not in config_files:
         gitpush.git_save('initial_config.py', user, token, repo)'''
 
 else:
+  st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
   st.text('...')
   test_read = open('initial_config.py', 'r')
   lines = test_read.readlines()
