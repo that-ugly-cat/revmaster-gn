@@ -24,6 +24,14 @@ if 'initial_config.py' not in config_files:
       st.divider()
       criteria = st.text_area('Assessment criteria', 'one\nper\nline')
       st.divider()
+      ###
+      st.subheader('Database configuration')
+      db_host = st.text_input('host', '')
+      db_user = st.text_input('user', '')
+      db_password = st.text_input('password', '')
+      db_database = st.text_input('database', '')
+      ###
+      st.divider()
       st.subheader('Upload the CSV file containing your papers to be assessed.')
       st.text('The file should contain at least the following columns to function properly: Key (unique identifier), Publication Year, Author, Title.')
       st.text('The code is tested and optimized for Zotero collection exports.')
