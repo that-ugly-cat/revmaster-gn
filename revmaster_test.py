@@ -85,6 +85,12 @@ else:
     country_options = f.readlines()
   except:
      st.error("Oops! There is something wrong with your country options file.\nThe file must be called \'country_options.txt\' and contain one country per row.")
+  # load include options
+  try:
+    f = open("configs/include_options.txt", "r")
+    country_options = f.readlines()
+  except:
+     st.error("Oops! There is something wrong with your country options file.\nThe file must be called \'country_options.txt\' and contain one country per row.")
   
   ###
   papers = list(db.collection(initial_config.firestore_collection).stream())
@@ -201,3 +207,4 @@ else:
       with col2:
         st.subheader("Assessment")
         st.subheader('Include?')
+        include = st.radio('Include', include_options, label_visibility = 'hidden')
