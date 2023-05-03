@@ -68,7 +68,7 @@ if 'initial_config.py' not in config_files:
         mycursor = mydb.cursor()
         mycursor.execute("SHOW TABLES")
         for x in mycursor:
-        st.write(x)
+          st.write(x)
         ###
         test_read = open('initial_config.py', 'r')
         lines = test_read.readlines()
