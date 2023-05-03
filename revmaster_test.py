@@ -50,10 +50,10 @@ if 'initial_config.py' not in config_files:
           l3 = critlist
           f.writelines([l1, l2, l3])'''
         ###
-        out = papers_df.to_dict()
+        out = papers_df.to_dict('index')
         for x in out:
           st.write(x)
-          st.write(type(x))
+          st.text(type(x))
         ###
         '''test_read = open('initial_config.py', 'r')
         lines = test_read.readlines()
