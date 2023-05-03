@@ -1,6 +1,0 @@
-project_title = 'title'
-project_description = 'descr'
-criteria = ['one', 'per', 'line', 'mamma']db_host = 'babba'
-db_user = 'bebba'
-db_password = 'bibba'
-db_database = 'bobba'
