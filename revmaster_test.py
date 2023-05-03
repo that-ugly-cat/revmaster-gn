@@ -253,4 +253,5 @@ else:
   with tab2:
     authorlist = []
     for x in papers_df['Author'].values.tolist():
-      st.text(x)
+      authorlist.append(x)
+      st.text(authorlist)
