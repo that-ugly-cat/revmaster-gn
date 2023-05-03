@@ -210,7 +210,7 @@ else:
           doc = doc_ref.get()
           st.subheader("Assessment")
           try:
-            option = include_options.(doc.include)
+            option = include_options.index(doc.include)
             include = st.radio('Include?', include_options, index = option)
           except:
             include = st.radio('Include?', include_options)
