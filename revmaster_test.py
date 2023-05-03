@@ -4,7 +4,7 @@ from io import StringIO
 import base64
 from st_aggrid import AgGrid, GridOptionsBuilder
 import os
-#import gitpush
+import gitpush
 
 # Initial configurations
 ####################################
@@ -50,8 +50,10 @@ if 'initial_config.py' not in config_files:
         lines = test_read.readlines()
         for line in lines:
           st.write(line)
-      
-      
+      user = st.secrets['github_user']
+      token = st.secrets['github_token']
+      repo = st.secrets['github_repo']
+      gitpush.git_save('configs/initial_config.py', user, token, repo)
 
 else:
   st.text('...')
