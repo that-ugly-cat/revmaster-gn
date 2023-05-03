@@ -52,7 +52,7 @@ if 'initial_config.py' not in config_files:
             if criterion != last_item:
               critlist = critlist + '\'' + criterion + '\', '
             if criterion == last_item:
-              critlist = critlist + '\'' + criterion + '\']'
+              critlist = critlist + '\'' + criterion + '\']\n'
           l3 = critlist
           l4 = 'db_host = \'' + db_host + '\'\n'
           l5 = 'db_user = \'' + db_user + '\'\n'
