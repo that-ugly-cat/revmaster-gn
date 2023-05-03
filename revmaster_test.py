@@ -217,4 +217,4 @@ else:
             study_year = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
         save_assessment = st.form_submit_button("Save")
         if save_assessment:
-          st.success('Saved!)
+          st.success('Saved!')
