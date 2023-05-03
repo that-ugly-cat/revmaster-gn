@@ -243,3 +243,7 @@ else:
         if save_assessment:
           doc.update({include: include_widget})
           st.success('Saved!')
+  ## tab 2 (papers per year)
+  with tab2:
+    data = papers_df['Publication Year'].value_counts()
+    st.write(data)
