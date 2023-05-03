@@ -103,10 +103,10 @@ else:
     # Configure AgGrid options
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_selection('single')
-    return AgGrid(
-      df,
-      gridOptions=gb.build()
-      )
+    ag = AgGrid(dataframe = df,
+                height = 200,
+                gridOptions=gb.build())
+    return ag
   ####################################
   # Tabs
   tab1, tab2, tab3, tab4 = st.tabs(["Assessment", 'Papers per year', 'Authors', 'Lemmas'])
