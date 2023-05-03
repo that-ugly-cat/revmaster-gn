@@ -43,7 +43,7 @@ if 'initial_config.py' not in config_files:
       ###
       save_1 = st.form_submit_button("Save")
       if save_1:
-        '''with open('initial_config.py', 'w') as f:
+        with open('initial_config.py', 'w') as f:
           l1 = 'project_title = \'' + project_title + '\'\n'
           l2 = 'project_description = \'' + project_description + '\'\n'
           criteria = criteria.split('\n')
@@ -56,7 +56,7 @@ if 'initial_config.py' not in config_files:
               critlist = critlist + '\'' + criterion + '\']\n'
           l3 = critlist
           l4 = firestore_collection
-          f.writelines([l1, l2, l3, l4])'''
+          f.writelines([l1, l2, l3, l4])
         ###
         df_as_dict = papers_df.to_dict('index')
         with st.spinner('Wait for it...'):
@@ -65,14 +65,10 @@ if 'initial_config.py' not in config_files:
             doc_ref.set(item)
         st.success('Done!')
         ###
-        '''test_read = open('initial_config.py', 'r')
-        lines = test_read.readlines()
-        for line in lines:
-          st.write(line)
         user = st.secrets['github_user']
         token = st.secrets['github_token']
         repo = st.secrets['github_repo']
-        gitpush.git_save('initial_config.py', user, token, repo)'''
+        gitpush.git_save('initial_config.py', user, token, repo)
 
 else:
   import initial_config
