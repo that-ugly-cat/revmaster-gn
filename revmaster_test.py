@@ -26,7 +26,7 @@ if 'initial_config.py' not in config_files:
         l1 = 'project_title = ' + project_title + '\n'
         l2 = 'project_description = ' + project_description + '\n'
         l3 = 'criteria = ' + criteria + '\n'
-      f.writelines([l1, l2, l3])
+        f.writelines([l1, l2, l3])
       test_read = open('configs/initial_config.py', 'r')
       lines = test_read.readlines()
       for line in lines:
