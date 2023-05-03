@@ -14,7 +14,7 @@ st.text(config_files)
 if 'initial_config.py' not in config_files:
   st.header('No configuration found.')
   st.subheader('Let\'s set up a new project')
-  with st.expander('Assessment criteria', expanded = True):
+  with st.expander('Title and description', expanded = True):
     with st.form("form_1"):
       project_title = st.text_input('Project title', '...')
       project_description = st.text_area('Text to analyze', '...')
@@ -30,3 +30,5 @@ if 'initial_config.py' not in config_files:
 
 else:
   st.text('...')
+st.write(project_title, project_description)
+st.write(criteria)   
