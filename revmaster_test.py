@@ -25,6 +25,7 @@ if 'initial_config.py' not in config_files:
       st.divider()
       criteria = st.text_area('Assessment criteria', 'one\nper\nline')
       st.divider()
+      firestore_collection = st.text_input('Firestore collection', '')
       ###
       st.subheader('Upload the CSV file containing your papers to be assessed.')
       st.text('The file should contain at least the following columns to function properly: Key (unique identifier), Publication Year, Author, Title.')
@@ -48,7 +49,8 @@ if 'initial_config.py' not in config_files:
             if criterion == last_item:
               critlist = critlist + '\'' + criterion + '\']\n'
           l3 = critlist
-          f.writelines([l1, l2, l3])'''
+          l4 = firestore_collection
+          f.writelines([l1, l2, l3, l4])'''
         ###
         df_as_dict = papers_df.to_dict('index')
         with st.spinner('Wait for it...'):
