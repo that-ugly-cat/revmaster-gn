@@ -28,9 +28,12 @@ if 'initial_config.py' not in config_files:
         l2 = 'project_description = \'' + project_description + '\'\n'
         criteria = criteria.split('\n')
         critlist = 'criteria = ['
+        last_item = critlist[-1]
         for criterion in criteria:
-          critlist = critlist + '\'' + criterion + '\', '
-        critlist = critlist + ']\n'  
+          if criterion != last_item:
+            critlist = critlist + '\'' + criterion + '\', '
+          if criterion == last_item:
+            critlist = critlist + '\'' + criterion + '\']'
         l3 = critlist
         f.writelines([l1, l2, l3])
       test_read = open('configs/initial_config.py', 'r')
