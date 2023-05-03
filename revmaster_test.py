@@ -20,7 +20,7 @@ if 'initial_config.py' not in config_files:
                      layout = 'centered', 
                      menu_items={'Get Help': 'https://www.extremelycoolapp.com/help',
                                  'Report a bug': "https://www.extremelycoolapp.com/bug",
-                                 'About': "# This is a header. This is an *extremely* cool app!")}
+                                 'About': "# This is a header. This is an *extremely* cool app!"})
   st.header('No configuration found.')
   st.subheader('Let\'s set up a new project')
   with st.expander('Title and description', expanded = True):
