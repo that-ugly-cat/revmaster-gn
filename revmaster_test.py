@@ -205,6 +205,16 @@ else:
         st.subheader("Paper")
         show_pdf(pdf_file)
       with col2:
-        st.subheader("Assessment")
-        st.subheader('Include?')
-        include = st.radio('Include', include_options, label_visibility = 'hidden')
+        with st.form("assessment_form"):
+          st.subheader("Assessment")
+          st.subheader('Include?')
+          include = st.radio('Include', include_options, label_visibility = 'hidden')
+          study_country = st.multiselect('Country', country_options)
+          try:
+            study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year_revmaster'].values[0])
+          except: 
+            study_year_value = 0
+            study_year = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
+        save_assessment = st.form_submit_button("Save")
+        if save_assessment:
+          st.success('Saved!)
