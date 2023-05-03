@@ -206,7 +206,7 @@ else:
         show_pdf(pdf_file)
       with col2:
         with st.form("assessment_form"):
-          doc_ref = db.collection(firestore_collection).document(paper_key)
+          doc_ref = db.collection(initial_config.firestore_collection).document(paper_key)
           doc = doc_ref.get()
           st.subheader("Assessment")
           st.write(doc.include)
