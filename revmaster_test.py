@@ -10,6 +10,7 @@ import os
 st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
 
 config_files = os.listdir('configs')
+
 st.text(config_files)
 if 'initial_config.py' not in config_files:
   st.header('No configuration found.')
@@ -17,7 +18,7 @@ if 'initial_config.py' not in config_files:
   with st.expander('Title and description', expanded = True):
     with st.form("form_1"):
       project_title = st.text_input('Project title', '...')
-      project_description = st.text_area('Text to analyze', '...')
+      project_description = st.text_area('Project description', '...')
       criteria = st.text_area('Assessment criteria', 'one\nper\nline')
       save_1 = st.form_submit_button("Save")
     if save_1:
@@ -25,6 +26,11 @@ if 'initial_config.py' not in config_files:
       with open('configs/initial_config.py', 'w') as f:
         l1 = 'project_title = ' + project_title + '\n'
         l2 = 'project_description = ' + project_description + '\n'
+        criteria = criteria.split('\n')
+        critlist = '['
+        for criterion in criteria:
+          critlist = critlist + '\'' + criterion + '\', '
+        critlist = critlist + ']'  
         l3 = 'criteria = ' + criteria + '\n'
         f.writelines([l1, l2, l3])
       test_read = open('configs/initial_config.py', 'r')
