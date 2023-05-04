@@ -237,7 +237,7 @@ else:
             study_year_value = doc_asdict['revmaster_year']            
           except: 
             try:
-              study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
+              study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0])
             except:
               study_year_value = 0
           study_year_widget = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
