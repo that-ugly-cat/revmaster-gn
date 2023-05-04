@@ -71,7 +71,7 @@ if 'initial_config.py' not in config_files:
         gitpush.git_save('initial_config.py', user, token, repo)
 
 else:
-  
+  ################### with everything configured###################
   import initial_config
   import base64
   from st_aggrid import AgGrid, GridOptionsBuilder
@@ -79,15 +79,6 @@ else:
   st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
   st.header(initial_config.project_title)
   st.text(initial_config.project_description)
-  with st.sidebar:
-    st.text('## Export data')
-    if st.button('Export'):
-      st.info('This function will export the assessment data as an excel file. Wait a sec...')
-      with st.spinner('Wait for it...'):
-        papers_df_export = export_data(initial_config.firestore_collection)
-        papers_df_export.to_excel('RevMaster assessment.xlsx')
-        st.download_button(label = 'Download', file_name = 'RevMaster assessment.xlsx', mime="application/vnd.ms-excel")
-    
   ###
   # load country options
   try:
@@ -411,4 +402,13 @@ else:
     st.pyplot(fig)
     st.bar_chart(data_df, x = 'Keyword', y = 'count')
     st.write(data_df)
-   
+  
+  ###sidebar 
+  with st.sidebar:
+    st.subheader('Export data')
+    if st.button('Export'):
+      st.info('This function will export the assessment data as an excel file. Wait a sec...')
+      with st.spinner('Wait for it...'):
+        papers_df_export = export_data(initial_config.firestore_collection)
+        papers_df_export.to_excel('RevMaster assessment.xlsx')
+        st.download_button(label = 'Download', file_name = 'RevMaster assessment.xlsx', mime="application/vnd.ms-excel")
