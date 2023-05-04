@@ -235,77 +235,76 @@ else:
       with col1:
         show_pdf(pdf_file)
       with col2:
-        with st.form("assessment_form"):
-          st.subheader("Assessment")
-          ## Include?
+        st.subheader("Assessment")
+        ## Include?
+        try:
+          option_include = doc_asdict['revmaster_include']
+          option_include_index = include_options.index(option_include)
+          if option_include == 'Yes':
+            st.success('Paper already assessed as: include', icon = '👌')
+          if option_include == 'No':
+            st.error('Paper already assessed as: exclude', icon = '⛔')
+          if option_include == 'Maybe':
+            st.info('Paper already assessed as: maybe', icon = '❔')
+          include_widget = st.radio('Include?', include_options, index = option_include_index)
+        except:
+          st.warning('Paper not assessed yet', icon = '⚠️')
+          include_widget = st.radio('Include?', include_options, index = 0)
+        ## Country
+        try:
+          options_country = doc_asdict['revmaster_country']
+          country_widget = st.multiselect('Country', options = country_options, default = options_country)
+        except:
+          country_widget = st.multiselect('Country', options = country_options, default = None)
+        # Year
+        try:
+          study_year_value = doc_asdict['revmaster_year']            
+        except: 
           try:
-            option_include = doc_asdict['revmaster_include']
-            option_include_index = include_options.index(option_include)
-            if option_include == 'Yes':
-              st.success('Paper already assessed as: include', icon = '👌')
-            if option_include == 'No':
-              st.error('Paper already assessed as: exclude', icon = '⛔')
-            if option_include == 'Maybe':
-              st.info('Paper already assessed as: maybe', icon = '❔')
-            include_widget = st.radio('Include?', include_options, index = option_include_index)
+            study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0])
           except:
-            st.warning('Paper not assessed yet', icon = '⚠️')
-            include_widget = st.radio('Include?', include_options, index = 0)
-          ## Country
-          try:
-            options_country = doc_asdict['revmaster_country']
-            country_widget = st.multiselect('Country', options = country_options, default = options_country)
-          except:
-            country_widget = st.multiselect('Country', options = country_options, default = None)
-          # Year
-          try:
-            study_year_value = doc_asdict['revmaster_year']            
-          except: 
-            try:
-              study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0])
-            except:
-              study_year_value = 0
-          study_year_widget = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
-          # Study type
-          try: 
-            option_study_type = doc_asdict['revmaster_study_type']
-            option_study_type_index = study_type_options.index(option_study_type)
-            study_type_widget = st.radio('Study type', options = study_type_options, index = option_study_type_index)
-          except:
-            study_type_widget = st.radio('Study type', options = study_type_options, index = 0)
+            study_year_value = 0
+        study_year_widget = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
+        # Study type
+        try: 
+          option_study_type = doc_asdict['revmaster_study_type']
+          option_study_type_index = study_type_options.index(option_study_type)
+          study_type_widget = st.radio('Study type', options = study_type_options, index = option_study_type_index)
+        except:
+          study_type_widget = st.radio('Study type', options = study_type_options, index = 0)
 
-          # Methodology
-          if study_type_widget == 'Empirical':
-            try:
-              options_methodology = doc_asdict['revmaster_methodology']
-              methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = options_methodology)
-            except: 
-              methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = None)
-          if study_type_widget == 'Literature review':
-            try:
-              options_methodology = doc_asdict['revmaster_methodology']
-              methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = options_methodology)
-            except:
-              methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = None)
-          else:
-            try:
-              options_methodology = doc_asdict['revmaster_methodology']
-              methodology_widget = st.text_input('Methodological notes', value = options_methodology)
-            except:
-              methodology_widget = st.text_input('Methodological notes', value = '')
-            
-            
-          
-          # Assessment criteria
-          
-          for criterion in initial_config.criteria:
-            try:
-              criterion_text = include_options.index(doc.criterion)
-              criterion_widget = st.text_area(criterion, criterion_text)
-            except:
-              criterion_text = ''
-              criterion_widget = st.text_area(criterion, criterion_text)
-          save_assessment = st.form_submit_button("Save")
+        # Methodology
+        if study_type_widget == 'Empirical':
+          try:
+            options_methodology = doc_asdict['revmaster_methodology']
+            methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = options_methodology)
+          except: 
+            methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = None)
+        if study_type_widget == 'Literature review':
+          try:
+            options_methodology = doc_asdict['revmaster_methodology']
+            methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = options_methodology)
+          except:
+            methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = None)
+        else:
+          try:
+            options_methodology = doc_asdict['revmaster_methodology']
+            methodology_widget = st.text_input('Methodological notes', value = options_methodology)
+          except:
+            methodology_widget = st.text_input('Methodological notes', value = '')
+
+
+
+        # Assessment criteria
+
+        for criterion in initial_config.criteria:
+          try:
+            criterion_text = include_options.index(doc.criterion)
+            criterion_widget = st.text_area(criterion, criterion_text)
+          except:
+            criterion_text = ''
+            criterion_widget = st.text_area(criterion, criterion_text)
+        save_assessment = st.button("Save")
         if save_assessment:
           doc_ref.update({'revmaster_include': include_widget, 
                           'revmaster_country': country_widget, 
