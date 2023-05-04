@@ -117,10 +117,14 @@ else:
      st.error("Oops! There is something wrong with your methodology options file (literature review).\nThe file must be called \'methodology_options_litrev.txt\' and contain one option per row.")      
   ###
   '''all good?'''
-  papers = list(db.collection(initial_config.firestore_collection).stream())
-  papers_dict = list(map(lambda x: x.to_dict(), papers))
-  papers_df = pd.DataFrame(papers_dict)
-  papers_df = papers_df[['Key', 'Author', 'Publication Year', 'Title', 'Abstract Note', 'DOI', 'Url', 'Manual Tags']]
+  @st.cache_data
+  def load_data(firestore_collection):
+    data = list(db.collection(firestore_collection).stream())
+    data_dict = list(map(lambda x: x.to_dict(), data))
+    data_df = pd.DataFrame(data_dict)
+    data_df = papers_df[['Key', 'Author', 'Publication Year', 'Title', 'Abstract Note', 'DOI', 'Url', 'Manual Tags']]
+    return data_df
+  papers_df = load_data(initial_config.firestore_collection)
   ####################################functions
   ## show papers
   def show_pdf(file_path):
