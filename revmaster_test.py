@@ -231,7 +231,7 @@ else:
             options_country = doc_asdict['revmaster_country']
             options_country_index = []
             for x in options_country:
-              options_country_index.append(country_options.include(x))
+              options_country_index.append(country_options.index(x))
             st.write(options_country)
             st.write(type(options_country))
             country_widget = st.multiselect('Country', country_options, options = options_country_index)
