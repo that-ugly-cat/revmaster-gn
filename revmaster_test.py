@@ -249,7 +249,8 @@ else:
           study_year_widget = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
           # Study type
           try: 
-            option_study_type = doc_asdict['revmaster_studytype']
+            option_study_type = doc_asdict['revmaster_study_type']
+            st.text(study_type_options)
             option_study_type_index = study_type_options.index(option_study_type)
             study_type_widget = st.radio('Study type', options = study_type_options, index = option_study_type_index)
           except:
