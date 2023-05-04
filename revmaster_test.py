@@ -268,6 +268,6 @@ else:
     plt.figure(figsize=(15,8))
     plt.imshow(wordcloud)
     plt.axis("off")
-    plt.show()
+    st.pyplot(plt.show())
     st.text(authorlist)
     st.write(data_df)
