@@ -252,7 +252,7 @@ else:
   ## tab 3 (authors)
   with tab3:
     from collections import Counter
-    #import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt
     from wordcloud import WordCloud
     authorlist = []
     for author_block in papers_df['Author'].values.tolist():
