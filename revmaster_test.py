@@ -405,6 +405,8 @@ else:
   
   ###sidebar 
   with st.sidebar:
+    import xlsxwriter
+    from pyxlsb import open_workbook as open_xlsb
     st.subheader('Export data')
     if st.button('Export'):
       st.info('This function will export the assessment data as an excel file. Wait a sec...')
