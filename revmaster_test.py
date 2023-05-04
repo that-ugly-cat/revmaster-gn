@@ -126,7 +126,6 @@ else:
   papers_df = load_data(initial_config.firestore_collection)
   ####################################functions
   ## show papers
-  @st.cache_data
   def show_pdf(file_path):
     with open(file_path,"rb") as f:
       base64_pdf = base64.b64encode(f.read()).decode('utf-8')
@@ -134,7 +133,6 @@ else:
     st.markdown(pdf_display, unsafe_allow_html=True)
 
   ## aggrid table
-  @st.cache_data
   def display_table(df):
     # Configure AgGrid options
     gb = GridOptionsBuilder.from_dataframe(df)
