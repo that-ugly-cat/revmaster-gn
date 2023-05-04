@@ -83,12 +83,14 @@ else:
   try:
     f = open("configs/country_options.txt", "r")
     country_options = f.readlines()
+    country_options = [s.strip() for s in country_options]
   except:
      st.error("Oops! There is something wrong with your country options file.\nThe file must be called \'country_options.txt\' and contain one country per row.")
   # load include options
   try:
     f = open("configs/include_options.txt", "r")
     include_options = f.readlines()
+    include_options = [s.strip() for s in include_options]
   except:
      st.error("Oops! There is something wrong with your include options file.\nThe file must be called \'include_options.txt\' and contain one option per row.")
   
@@ -213,10 +215,7 @@ else:
           ## Include?
           try:
             option = doc_asdict['include']
-            st.write(option)
-            st.write(include_options)
             option_index = include_options.index(option)
-            
             if option == 'Yes':
               st.success('Paper already assessed (include)')
             if option == 'No':
@@ -226,6 +225,7 @@ else:
             include_widget = st.radio('Include?', include_options, index = option_index)
           except:
             include_widget = st.radio('Include?', include_options)
+            st.warning('Paper not assessed yet', icon="⚠️")
           ## Country
           try:
             study_country = st.multiselect('Country', country_options)
