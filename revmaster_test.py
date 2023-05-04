@@ -221,7 +221,7 @@ else:
             if option_include == 'No':
               st.error('Paper already assessed as: exclude', icon = '⛔')
             if option_include == 'Maybe':
-              st.info('Paper already assessed as: maybe')
+              st.info('Paper already assessed as: maybe', icon = '❔')
             include_widget = st.radio('Include?', include_options, index = option_include_index)
           except:
             st.warning('Paper not assessed yet', icon = '⚠️')
@@ -233,6 +233,8 @@ else:
           except:
             country_widget = st.multiselect('Country', options = country_options, default = None)
           # Year
+          testvar = papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0]
+          st.text(testvar)
           try:
             study_year_value = doc_asdict['revmaster_year']            
           except: 
