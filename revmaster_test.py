@@ -229,7 +229,6 @@ else:
           ## Country
           try:
             options_country = doc_asdict['revmaster_country']
-            st.text(options_country)
             country_widget = st.multiselect('Country', options = country_options, default = options_country)
           except:
             country_widget = st.multiselect('Country', options = country_options, default = None)
