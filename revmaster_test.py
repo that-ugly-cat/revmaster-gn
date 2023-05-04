@@ -97,7 +97,7 @@ else:
   try:
     f = open("configs/studytype_options.txt", "r")
     study_type_options = f.readlines()
-    study_type_options = [s.strip() for s in include_options]
+    study_type_options = [s.strip() for s in study_type_options]
   except:
      st.error("Oops! There is something wrong with your study type options file.\nThe file must be called \'studytype_options.txt\' and contain one option per row.")
   
