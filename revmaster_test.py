@@ -107,14 +107,25 @@ else:
     methodology_options_empirical = [s.strip() for s in methodology_options_empirical]
   except:
      st.error("Oops! There is something wrong with your methodology options file (empirical).\nThe file must be called \'methodology_options_empirical.txt\' and contain one option per row.")      
-  
+# load explanation of options
+  try:
+    f = open("configs/methodology_options_empirical_explanation.txt", "r")
+    methodology_options_empirical_explanation = f.read()      
+  except:
+     st.error("Oops! There is something wrong with your explanations file (empirical).\nThe file must be called \'methodology_options_empirical_explanation.txt\'")  
 # load methodology options (literature review)
   try:
     f = open("configs/methodology_options_litrev.txt", "r")
     methodology_options_litrev = f.readlines()
     methodology_options_litrev = [s.strip() for s in methodology_options_litrev]
   except:
-     st.error("Oops! There is something wrong with your methodology options file (literature review).\nThe file must be called \'methodology_options_litrev.txt\' and contain one option per row.")      
+     st.error("Oops! There is something wrong with your methodology options file (literature review).\nThe file must be called \'methodology_options_litrev.txt\' and contain one option per row.")
+# load explanation of options
+  try:
+    f = open("configs/methodology_options_litrev_explanation.txt", "r")
+    methodology_options_litrev_explanation = f.read()
+  except:
+     st.error("Oops! There is something wrong with your explanations file (literature review).\nThe file must be called \'methodology_options_litrev_explanation.txt\'")    
   ###
   @st.cache_data
   def load_data(firestore_collection):
@@ -230,7 +241,7 @@ else:
     # Display PDF and assessment fields
     ####################################
     with st.container():
-      col1, col2 = st.columns([3, 1])
+      col1, col2 = st.columns([3, 2])
       with col1:
         show_pdf(pdf_file)
       with col2:
@@ -277,14 +288,22 @@ else:
         if study_type_widget == 'Empirical':
           try:
             options_methodology = doc_asdict['revmaster_methodology']
+            with st.expander('See explanation of options'):
+              st.write(methodology_options_empirical_explanation)
             methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = options_methodology)
           except: 
+            with st.expander('See explanation of options'):
+              st.write(methodology_options_empirical_explanation)
             methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = None)
         if study_type_widget == 'Literature review':
           try:
             options_methodology = doc_asdict['revmaster_methodology']
+            with st.expander('See explanation of options'):
+              st.write(methodology_options_litrev_explanation)
             methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = options_methodology)
           except:
+            with st.expander('See explanation of options'):
+              st.write(methodology_options_litrev_explanation)
             methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = None)
         if study_type_widget in ['Theoretical', 'Viewpoint/commentary', 'Other']:
           try:
@@ -321,7 +340,6 @@ else:
               savedict[criterion_dict_index] = '...'
             else:
               savedict[criterion_dict_index] = st.session_state[criterion_widget_name]
-          st.write(savedict)
           doc_ref.update(savedict)
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
