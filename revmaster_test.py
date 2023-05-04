@@ -342,7 +342,7 @@ else:
                     'revmaster_methodology' : methodology_widget}
           for criterion in initial_config.criteria:
             criterion_widget_name = criterion + '_widget'
-            criterion_dict_index = 'revmaster_' + criterion.replace(' ', '_')
+            criterion_dict_index = 'revmaster_' + criterion.replace(' ', '_').replace(':', '_')
             if st.session_state[criterion_widget_name] == '':
               savedict[criterion_dict_index] = '...'
             else:
