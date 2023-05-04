@@ -271,6 +271,7 @@ else:
           option_study_type_index = study_type_options.index(option_study_type)
           study_type_widget = st.radio('Study type', options = study_type_options, index = option_study_type_index)
         except:
+          option_study_type = study_type_options[0]
           study_type_widget = st.radio('Study type', options = study_type_options, index = 0)
 
         # Methodology
