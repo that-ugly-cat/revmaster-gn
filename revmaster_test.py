@@ -213,6 +213,7 @@ else:
           ## Include?
           try:
             option = doc_asdict['include']
+            st.write(option)
             option_index = include_options.index(option)
             if option == 'Yes':
               st.success('Paper already assessed (include)')
