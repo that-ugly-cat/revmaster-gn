@@ -271,7 +271,7 @@ else:
           doc_ref.update({'revmaster_include': include_widget, 
                           'revmaster_country': country_widget, 
                           'revmaster_study_year' : study_year_widget,
-                         'revmaster_study_type' = study_type_widget})
+                         'revmaster_study_type' : study_type_widget})
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
   with tab2:
