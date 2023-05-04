@@ -256,25 +256,28 @@ else:
             st.error('Paper already assessed as: exclude', icon = '⛔')
           if option_include == 'Maybe':
             st.info('Paper already assessed as: maybe', icon = '❔')
-          include_widget = st.radio('Include?', include_options, index = option_include_index)
+          include_widget = st.radio('Include?', include_options, index = option_include_index, horizontal = True)
         except:
           st.warning('Paper not assessed yet', icon = '⚠️')
-          include_widget = st.radio('Include?', include_options, index = 0)
-        ## Country
-        try:
-          options_country = doc_asdict['revmaster_country']
-          country_widget = st.multiselect('Country', options = country_options, default = options_country)
-        except:
-          country_widget = st.multiselect('Country', options = country_options, default = None)
-        # Year
-        try:
-          study_year_value = doc_asdict['revmaster_year']            
-        except: 
+          include_widget = st.radio('Include?', include_options, index = 0, horizontal = True)
+        col1_sidebar, col2_sidebar = st.columns(2)
+        with col1_sidebar:
+          ## Country
           try:
-            study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0])
+            options_country = doc_asdict['revmaster_country']
+            country_widget = st.multiselect('Country', options = country_options, default = options_country)
           except:
-            study_year_value = 0
-        study_year_widget = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
+            country_widget = st.multiselect('Country', options = country_options, default = None)
+        with col2_sidebar:
+        # Year
+          try:
+            study_year_value = doc_asdict['revmaster_year']            
+          except: 
+            try:
+              study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0])
+            except:
+              study_year_value = 0
+          study_year_widget = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
         # Study type
         try: 
           option_study_type = doc_asdict['revmaster_study_type']
