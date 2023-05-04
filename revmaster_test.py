@@ -252,17 +252,18 @@ else:
   ## tab 3 (authors)
   with tab3:
     from collections import Counter
-    import matplotlib.pyplot as plt
-    from wordcloud import WordCloud
+    #import matplotlib.pyplot as plt
+    #from wordcloud import WordCloud
     authorlist = []
     for author_block in papers_df['Author'].values.tolist():
       authors = author_block.split(';')
       for author in authors:
         authorlist.append(author)
     word_could_dict=Counter(authorlist)
-    wordcloud = WordCloud(width = 1000, height = 500).generate_from_frequencies(word_could_dict)
+    '''wordcloud = WordCloud(width = 1000, height = 500).generate_from_frequencies(word_could_dict)
     plt.figure(figsize=(15,8))
     plt.imshow(wordcloud)
     plt.axis("off")
     plt.close()
-    st.text(authorlist)
+    st.text(authorlist)'''
+    st.write(word_could_dict)
