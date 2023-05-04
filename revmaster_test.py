@@ -214,20 +214,22 @@ else:
           st.subheader("Assessment")
           ## Include?
           try:
-            option = doc_asdict['include']
-            option_index = include_options.index(option)
+            option_include = doc_asdict['revmaster_include']
+            option_include_index = include_options.index(option_include)
             if option == 'Yes':
-              st.success('Paper already assessed as: include')
+              st.success('Paper already assessed as: include', icon = '👌')
             if option == 'No':
-              st.error('Paper already assessed as: exclude')
+              st.error('Paper already assessed as: exclude', icon = '⛔')
             if option == 'Maybe':
               st.info('Paper already assessed as: maybe')
             include_widget = st.radio('Include?', include_options, index = option_index)
           except:
-            st.warning('Paper not assessed yet', icon="⚠️")
+            st.warning('Paper not assessed yet', icon = '⚠️')
             include_widget = st.radio('Include?', include_options)
           ## Country
           try:
+            options_country = doc_asdict['revmaster_country']
+            options_country_index = []
             study_country = st.multiselect('Country', country_options)
           except:
             study_country = st.multiselect('Country', country_options)
@@ -252,7 +254,7 @@ else:
               criterion_widget = st.text_area(criterion, criterion_text)
           save_assessment = st.form_submit_button("Save")
         if save_assessment:
-          doc_ref.update({'include': include_widget})
+          doc_ref.update({'revmaster_include': include_widget}, {'revmaster_country': country_widget})
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
   with tab2:
