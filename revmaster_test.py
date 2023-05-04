@@ -272,6 +272,8 @@ else:
     st.write(data_df)
   ## tab 4 (manual tags)
   with tab4:
+    st.text('Manual tags include keywords and MeSH terms aggregated in one single column.')
+    st.text('A stoplist is hard-coded in the software, it contains the word \'article\' and it can be customized in the code.')
     from collections import Counter
     import matplotlib.pyplot as plt
     from wordcloud import WordCloud
@@ -281,7 +283,7 @@ else:
         kws = kw_block.split(';')
         for kw in kws:
           kw_processed = kw.strip().lower().replace('*', '')
-          if kw_processed not in ['article', 'other stopwords']:
+          if kw_processed not in ['article', 'other stopwords']: # this is the stoplist
             kwlist.append(kw_processed)
     data = Counter(kwlist)
     data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
