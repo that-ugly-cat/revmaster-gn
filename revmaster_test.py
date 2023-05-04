@@ -260,7 +260,7 @@ else:
       for author in authors:
         authorlist.append(author)
     data = Counter(authorlist)
-    data_df = pd.DataFrame.from_dict(data, orient='index').reset_index(
+    data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
     '''wordcloud = WordCloud(width = 1000, height = 500).generate_from_frequencies(word_could_dict)
     plt.figure(figsize=(15,8))
     plt.imshow(wordcloud)
