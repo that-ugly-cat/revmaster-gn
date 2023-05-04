@@ -213,8 +213,8 @@ else:
           ## Include?
           try:
             option = doc_asdict['include']
-            st.write(type(option))
             st.write(option)
+            st.write(include_options)
             option_index = include_options.index(option)
             
             if option == 'Yes':
