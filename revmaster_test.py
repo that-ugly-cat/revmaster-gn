@@ -412,18 +412,8 @@ else:
       st.info('This function will export the assessment data as an excel file. Wait a sec...')
       with st.spinner('Wait for it...'):
         papers_df_export = export_data(initial_config.firestore_collection)
+        papers_df_export.to_excel("RevMaster assessment.xlsx")
+        with open('RevMaster assessment.xlsx', 'rb') as template_file:
+          template_byte = template_file.read()
         
-        def to_excel(df):
-          output = BytesIO()
-          writer = pd.ExcelWriter(output, engine='xlsxwriter')
-          df.to_excel(writer, index=False, sheet_name='Sheet1')
-          workbook = writer.book
-          worksheet = writer.sheets['Sheet1']
-          format1 = workbook.add_format({'num_format': '0.00'}) 
-          worksheet.set_column('A:A', None, format1)  
-          writer.save()
-          processed_data = output.getvalue()
-          return processed_data
-        df_xlsx = to_excel(papers_df_export)
-        
-        st.download_button(label = 'Download', file_name = 'RevMaster assessment.xlsx', data = df_xlsx)
+        st.download_button(label = 'Download', file_name = 'RevMaster assessment.xlsx', data = template_byte, mime='application/octet-stream')
