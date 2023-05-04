@@ -1,1 +1,5 @@
-review types
+Traditional (narrative) review
+Rapid review
+Scoping review
+Systematic review
+Meta analysis
