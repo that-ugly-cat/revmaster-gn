@@ -318,6 +318,7 @@ else:
             criterion_widget_name = criterion + '_widget'
             criterion_dict_index = 'revmaster_' + criterion
             savedict[criterion_dict_index] = st.session_state[criterion_widget_name]
+          st.write(savedict)
           doc_ref.update(savedict)
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
