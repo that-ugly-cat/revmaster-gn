@@ -107,7 +107,7 @@ else:
     methodology_options_empirical = [s.strip() for s in methodology_options_empirical]
   except:
      st.error("Oops! There is something wrong with your methodology options file (empirical).\nThe file must be called \'methodology_options_empirical.txt\' and contain one option per row.")      
-  '''all good?'''
+  
 # load methodology options (literature review)
   try:
     f = open("configs/methodology_options_litrev.txt", "r")
@@ -116,6 +116,7 @@ else:
   except:
      st.error("Oops! There is something wrong with your methodology options file (literature review).\nThe file must be called \'methodology_options_litrev.txt\' and contain one option per row.")      
   ###
+  '''all good?'''
   papers = list(db.collection(initial_config.firestore_collection).stream())
   papers_dict = list(map(lambda x: x.to_dict(), papers))
   papers_df = pd.DataFrame(papers_dict)
