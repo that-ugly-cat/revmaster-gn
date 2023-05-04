@@ -271,13 +271,14 @@ else:
     st.bar_chart(data_df, x = 'Author', y = 'count')
     st.write(data_df)
   ## tab 4 (manual tags)
-  '''with tab4:
+  with tab4:
     from collections import Counter
     import matplotlib.pyplot as plt
     from wordcloud import WordCloud
     kwlist = []
     for kw_block in papers_df['Manual Tags'].values.tolist():
-      kws = kw_block.split(';')
+      st.write(kw_block)
+      '''kws = kw_block.split(';')
       for kw in kws:
         kwlist.append(kw)
     data = Counter(kwlist)
