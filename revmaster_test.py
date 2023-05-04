@@ -229,19 +229,19 @@ else:
           ## Country
           try:
             options_country = doc_asdict['revmaster_country']
-            options_country_index = []
-            for x in options_country:
-              options_country_index.append(country_options.index(x))
             st.text(options_country)
             country_widget = st.multiselect('Country', options = country_options, default = options_country)
           except:
             country_widget = st.multiselect('Country', options = country_options, default = None)
           # Year
           try:
-            study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
+            study_year_value = doc_asdict['revmaster_year']            
           except: 
-            study_year_value = 0
-            study_year = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
+            try:
+              study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
+            except:
+              study_year_value = 0
+          study_year_widget = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
           # Study type
           
           # Methodology
@@ -257,7 +257,9 @@ else:
               criterion_widget = st.text_area(criterion, criterion_text)
           save_assessment = st.form_submit_button("Save")
         if save_assessment:
-          doc_ref.update({'revmaster_include': include_widget, 'revmaster_country': country_widget})
+          doc_ref.update({'revmaster_include': include_widget, 
+                          'revmaster_country': country_widget, 
+                          'revmaster_year' = study_year_widget})
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
   with tab2:
