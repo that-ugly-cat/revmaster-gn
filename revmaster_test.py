@@ -230,6 +230,8 @@ else:
           try:
             options_country = doc_asdict['revmaster_country']
             options_country_index = []
+            st.write(options_country)
+            st.write(type(options_country))
             country_widget = st.multiselect('Country', country_options)
           except:
             country_widget = st.multiselect('Country', country_options)
