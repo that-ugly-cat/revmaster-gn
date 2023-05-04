@@ -254,7 +254,7 @@ else:
               criterion_widget = st.text_area(criterion, criterion_text)
           save_assessment = st.form_submit_button("Save")
         if save_assessment:
-          doc_ref.update({'revmaster_include': include_widget}, {'revmaster_country': country_widget})
+          doc_ref.update({'revmaster_include': include_widget, 'revmaster_country': country_widget})
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
   with tab2:
