@@ -271,7 +271,7 @@ else:
     st.bar_chart(data_df, x = 'Author', y = 'count')
     st.write(data_df)
   ## tab 4 (manual tags)
-  with tab4:
+  '''with tab4:
     from collections import Counter
     import matplotlib.pyplot as plt
     from wordcloud import WordCloud
@@ -290,4 +290,4 @@ else:
     plt.axis("off")
     st.pyplot(fig)
     st.bar_chart(data_df, x = 'Keyword', y = 'count')
-    st.write(data_df)
+    st.write(data_df)'''
