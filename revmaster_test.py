@@ -122,7 +122,7 @@ else:
     data = list(db.collection(firestore_collection).stream())
     data_dict = list(map(lambda x: x.to_dict(), data))
     data_df = pd.DataFrame(data_dict)
-    data_df = papers_df[['Key', 'Author', 'Publication Year', 'Title', 'Abstract Note', 'DOI', 'Url', 'Manual Tags']]
+    data_df = data_df[['Key', 'Author', 'Publication Year', 'Title', 'Abstract Note', 'DOI', 'Url', 'Manual Tags']]
     return data_df
   papers_df = load_data(initial_config.firestore_collection)
   ####################################functions
