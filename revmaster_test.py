@@ -251,9 +251,9 @@ else:
           try: 
             option_study_type = doc_asdict['revmaster_studytype']
             option_study_type_index = study_type_options.index(option_study_type)
-            study_type_widget = st.radio('Study type', study_type_options, index = option_study_type_index)
+            study_type_widget = st.radio('Study type', options = study_type_options, index = option_study_type_index)
           except:
-            study_type_widget = st.radio('Study type', study_type_options, index = 0)
+            study_type_widget = st.radio('Study type', options = study_type_options, index = 0)
           
           # Methodology
           
