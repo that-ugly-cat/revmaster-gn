@@ -107,7 +107,7 @@ else:
     methodology_options_empirical = [s.strip() for s in methodology_options_empirical]
   except:
      st.error("Oops! There is something wrong with your methodology options file (empirical).\nThe file must be called \'methodology_options_empirical.txt\' and contain one option per row.")      
-  
+  '''all good?'''
 # load methodology options (literature review)
   try:
     f = open("configs/methodology_options_litrev.txt", "r")
