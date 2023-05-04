@@ -210,7 +210,7 @@ else:
           doc = doc_ref.get()
           doc_asdict = doc.to_dict()
           st.subheader("Assessment")
-          st.write(doc_asdict)
+          st.write(doc_asdict['Title'])
           ## Include?
           try:
             option = include_options.index(doc.include)
