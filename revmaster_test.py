@@ -233,8 +233,8 @@ else:
           except:
             country_widget = st.multiselect('Country', options = country_options, default = None)
           # Year
-          testvar = papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0]
-          st.text(testvar)
+          year_from_df = int(papers_df[papers_df['Key'] == paper_key]['Publication Year'].values[0])
+          st.text(year_from_df)
           try:
             study_year_value = doc_asdict['revmaster_year']            
           except: 
