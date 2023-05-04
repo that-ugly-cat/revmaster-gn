@@ -71,13 +71,23 @@ if 'initial_config.py' not in config_files:
         gitpush.git_save('initial_config.py', user, token, repo)
 
 else:
+  
   import initial_config
+  import base64
+  from st_aggrid import AgGrid, GridOptionsBuilder
+  ###
   st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
   st.header(initial_config.project_title)
   st.text(initial_config.project_description)
-  ###
-  import base64
-  from st_aggrid import AgGrid, GridOptionsBuilder
+  with st.sidebar:
+    st.text('## Export data')
+    if st.button('Export'):
+      st.info('This function will export the assessment data as an excel file. Wait a sec...')
+      with st.spinner('Wait for it...'):
+        papers_df_export = export_data(initial_config.firestore_collection)
+        papers_df_export.to_excel('RevMaster assessment.xlsx')
+        st.download_button(label = 'Download', file_name = 'RevMaster assessment.xlsx', mime="application/vnd.ms-excel")
+    
   ###
   # load country options
   try:
@@ -135,6 +145,13 @@ else:
     data_df = data_df[['Key', 'Author', 'Publication Year', 'Title', 'Abstract Note', 'DOI', 'Url', 'Manual Tags']]
     return data_df
   papers_df = load_data(initial_config.firestore_collection)
+  
+   def export_data(firestore_collection):
+    data = list(db.collection(firestore_collection).stream())
+    data_dict = list(map(lambda x: x.to_dict(), data))
+    data_df = pd.DataFrame(data_dict)
+    return data_df
+  
   ####################################functions
   ## show papers
   def show_pdf(file_path):
