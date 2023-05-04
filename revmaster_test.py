@@ -263,10 +263,10 @@ else:
     data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
     data_df.columns = ['Author', 'count']
     data_df = data_df.sort_values(by=['count'], ascending = False)
-    st.bar_chart(data_df, x = 'Author', y = 'count')
-    wordcloud = WordCloud().generate_from_frequencies(data)
+    wordcloud = WordCloud(background_color="white").generate_from_frequencies(data)
     fig, ax = plt.subplots(figsize = (12, 8))
-    ax.imshow(wordcloud)
+    ax.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
     st.pyplot(fig)
+    st.bar_chart(data_df, x = 'Author', y = 'count')
     st.write(data_df)
