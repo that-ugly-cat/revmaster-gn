@@ -293,8 +293,6 @@ else:
           except:
             methodology_widget = st.text_input('Methodological notes', value = '')
 
-
-
         # Assessment criteria
 
         for criterion in initial_config.criteria:
@@ -309,7 +307,8 @@ else:
           doc_ref.update({'revmaster_include': include_widget, 
                           'revmaster_country': country_widget, 
                           'revmaster_study_year' : study_year_widget,
-                          'revmaster_study_type' : study_type_widget})
+                          'revmaster_study_type' : study_type_widget, 
+                          'revmaster_methodology' : methodology_widget})
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
   with tab2:
