@@ -262,7 +262,7 @@ else:
     data = Counter(authorlist)
     data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
     data_df.columns = ['Author', 'count']
-    data_df.sort_values(by=['count'], ascending = False)
+    data_df = data_df.sort_values(by=['count'], ascending = False)
     '''wordcloud = WordCloud(width = 1000, height = 500).generate_from_frequencies(word_could_dict)
     plt.figure(figsize=(15,8))
     plt.imshow(wordcloud)
