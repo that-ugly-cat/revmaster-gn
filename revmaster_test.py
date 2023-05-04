@@ -161,6 +161,7 @@ else:
     ####################################
     # see: https://discuss.streamlit.io/t/ag-grid-component-with-input-support/8108/242
     paper = display_table(papers_df)
+    st.divider()
     try: 
       paper_key = (paper['selected_rows'][0]['Key'])
       idx = papers_df[papers_df['Key']== paper_key].index.item()
@@ -240,6 +241,7 @@ else:
 
     # Display PDF and assessment fields
     ####################################
+    st.divider()
     with st.container():
       col1, col2 = st.columns([3, 2])
       with col1:
