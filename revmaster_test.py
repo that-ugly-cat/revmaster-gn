@@ -277,9 +277,9 @@ else:
     from wordcloud import WordCloud
     kwlist = []
     for kw_block in papers_df['Manual Tags'].values.tolist():
-      st.write(kw_block)
-      '''kws = kw_block.split(';')
-      for kw in kws:
+      kws = kw_block.split(';')
+      st.write(kws)
+      '''for kw in kws:
         kwlist.append(kw)
     data = Counter(kwlist)
     data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
