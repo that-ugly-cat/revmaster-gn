@@ -117,7 +117,7 @@ else:
   ####################################
   # Tabs
   tab1, tab2, tab3, tab4 = st.tabs(["Assessment", 'Papers per year', 'Authors', 'Manual tags (= keywords)'])
-  ## tab 1 (assessment)
+  ## tab 1 (assessment)###############################################
   with tab1:
     # Main area (paper table)
     ####################################
@@ -212,6 +212,7 @@ else:
           ## Include?
           try:
             option = include_options.index(doc.include)
+            st.write(option)
             include_widget = st.radio('Include?', include_options, index = option)
           except:
             include_widget = st.radio('Include?', include_options)
@@ -243,13 +244,13 @@ else:
         if save_assessment:
           doc.update({include: include_widget})
           st.success('Saved!')
-  ## tab 2 (papers per year)
+  ## tab 2 (papers per year)###############################################
   with tab2:
     data = papers_df['Publication Year'].value_counts().rename_axis('Year').to_frame('counts')
     data = data.sort_values('Year')
     st.line_chart(data)
     st.write(data)
-  ## tab 3 (authors)
+  ## tab 3 (authors)###############################################
   with tab3:
     from collections import Counter
     import matplotlib.pyplot as plt
@@ -270,7 +271,7 @@ else:
     st.pyplot(fig)
     st.bar_chart(data_df, x = 'Author', y = 'count')
     st.write(data_df)
-  ## tab 4 (manual tags)
+  ## tab 4 (manual tags)###############################################
   with tab4:
     st.text('Manual tags include keywords and MeSH terms aggregated in one single column.')
     st.text('A stoplist is hard-coded in the software, it contains the word \'article\' and it can be customized in the code.')
