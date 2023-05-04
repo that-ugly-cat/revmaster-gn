@@ -146,7 +146,7 @@ else:
     return data_df
   papers_df = load_data(initial_config.firestore_collection)
   
-   def export_data(firestore_collection):
+  def export_data(firestore_collection):
     data = list(db.collection(firestore_collection).stream())
     data_dict = list(map(lambda x: x.to_dict(), data))
     data_df = pd.DataFrame(data_dict)
