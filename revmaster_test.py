@@ -126,6 +126,9 @@ else:
     try: 
       paper_key = (paper['selected_rows'][0]['Key'])
       idx = papers_df[papers_df['Key']== paper_key].index.item()
+      doc_ref = db.collection(initial_config.firestore_collection).document(paper_key)
+      doc = doc_ref.get()
+      doc_asdict = doc.to_dict()
     except: 
       paper_key = papers_df.iloc[0]['Key']
       idx = papers_df[papers_df['Key']== paper_key].index.item()
@@ -206,9 +209,9 @@ else:
         show_pdf(pdf_file)
       with col2:
         with st.form("assessment_form"):
-          doc_ref = db.collection(initial_config.firestore_collection).document(paper_key)
+          '''doc_ref = db.collection(initial_config.firestore_collection).document(paper_key)
           doc = doc_ref.get()
-          doc_asdict = doc.to_dict()
+          doc_asdict = doc.to_dict()'''
           st.subheader("Assessment")
           st.write(doc_asdict['include'])
           ## Include?
