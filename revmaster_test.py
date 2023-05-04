@@ -225,16 +225,18 @@ else:
             include_widget = st.radio('Include?', include_options, index = option_index)
           except:
             st.warning('Paper not assessed yet', icon = '⚠️')
-            include_widget = st.radio('Include?', include_options)
+            include_widget = st.radio('Include?', include_options, index = 0)
           ## Country
           try:
             options_country = doc_asdict['revmaster_country']
             options_country_index = []
+            for x in options_country:
+              options_country_index.append(country_options.include(x))
             st.write(options_country)
             st.write(type(options_country))
-            country_widget = st.multiselect('Country', country_options)
+            country_widget = st.multiselect('Country', country_options, options = options_country_index)
           except:
-            country_widget = st.multiselect('Country', country_options)
+            country_widget = st.multiselect('Country', country_options = [])
           # Year
           try:
             study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
