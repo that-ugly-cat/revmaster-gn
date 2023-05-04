@@ -95,12 +95,26 @@ else:
      st.error("Oops! There is something wrong with your include options file.\nThe file must be called \'include_options.txt\' and contain one option per row.")
   # load study type options
   try:
-    f = open("configs/studytype_options.txt", "r")
+    f = open("configs/study_type_options.txt", "r")
     study_type_options = f.readlines()
     study_type_options = [s.strip() for s in study_type_options]
   except:
-     st.error("Oops! There is something wrong with your study type options file.\nThe file must be called \'studytype_options.txt\' and contain one option per row.")
+     st.error("Oops! There is something wrong with your study type options file.\nThe file must be called \'study_type_options.txt\' and contain one option per row.")
+# load methodology options (empirical)
+  try:
+    f = open("configs/methodology_options_empirical.txt", "r")
+    methodology_options_empirical = f.readlines()
+    methodology_options_empirical = [s.strip() for s in methodology_options_empirical]
+  except:
+     st.error("Oops! There is something wrong with your methodology options file (empirical).\nThe file must be called \'methodology_options_empirical.txt\' and contain one option per row.")      
   
+# load methodology options (literature review)
+  try:
+    f = open("configs/methodology_options_litrev.txt", "r")
+    methodology_options_litrev = f.readlines()
+    methodology_options_litrev = [s.strip() for s in methodology_options_litrev]
+  except:
+     st.error("Oops! There is something wrong with your methodology options file (literature review).\nThe file must be called \'methodology_options_litrev.txt\' and contain one option per row.")      
   ###
   papers = list(db.collection(initial_config.firestore_collection).stream())
   papers_dict = list(map(lambda x: x.to_dict(), papers))
@@ -248,15 +262,34 @@ else:
               study_year_value = 0
           study_year_widget = st.number_input('Year', format = '%d', step = 1, value = study_year_value)
           # Study type
-          st.text(study_type_options)
           try: 
             option_study_type = doc_asdict['revmaster_study_type']
             option_study_type_index = study_type_options.index(option_study_type)
             study_type_widget = st.radio('Study type', options = study_type_options, index = option_study_type_index)
           except:
             study_type_widget = st.radio('Study type', options = study_type_options, index = 0)
-          
+
           # Methodology
+          if study_type_widget == 'Empirical':
+            try:
+              options_methodology = doc_asdict['revmaster_methodology']
+              methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = options_methodology)
+            except: 
+              methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = None)
+          if study_type_widget == 'Literature review':
+            try:
+              options_methodology = doc_asdict['revmaster_methodology']
+              methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = options_methodology)
+            except:
+              methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = None)
+          else:
+            try:
+              options_methodology = doc_asdict['revmaster_methodology']
+              methodology_widget = st.text_input('Methodological notes', value = options_methodology)
+            except:
+              methodology_widget = st.text_input('Methodological notes', value = '')
+            
+            
           
           # Assessment criteria
           
@@ -272,7 +305,7 @@ else:
           doc_ref.update({'revmaster_include': include_widget, 
                           'revmaster_country': country_widget, 
                           'revmaster_study_year' : study_year_widget,
-                         'revmaster_study_type' : study_type_widget})
+                          'revmaster_study_type' : study_type_widget})
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
   with tab2:
