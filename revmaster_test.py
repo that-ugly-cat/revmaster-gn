@@ -259,11 +259,12 @@ else:
       authors = author_block.split(';')
       for author in authors:
         authorlist.append(author)
-    word_could_dict=Counter(authorlist)
+    data = Counter(authorlist)
+    data_df = pd.DataFrame.from_dict(data, orient='index').reset_index(
     '''wordcloud = WordCloud(width = 1000, height = 500).generate_from_frequencies(word_could_dict)
     plt.figure(figsize=(15,8))
     plt.imshow(wordcloud)
     plt.axis("off")
     plt.close()
     st.text(authorlist)'''
-    st.write(word_could_dict)
+    st.write(data_df)
