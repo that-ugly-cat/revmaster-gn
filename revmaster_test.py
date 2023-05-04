@@ -258,7 +258,7 @@ else:
     for author_block in papers_df['Author'].values.tolist():
       authors = author_block.split(';')
       for author in authors:
-        authorlist.append(author)
+        authorlist.append(author.strip())
     data = Counter(authorlist)
     data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
     data_df.columns = ['Author', 'count']
