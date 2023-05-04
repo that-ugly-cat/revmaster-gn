@@ -316,9 +316,9 @@ else:
                     'revmaster_study_type' : study_type_widget, 
                     'revmaster_methodology' : methodology_widget}
           for criterion in initial_config.criteria:
-          criterion_widget_name = criterion + _widget
-          criterion_dict_index = 'revmaster_' + criterion
-          savedict[criterion_dict_index] = st.session_state[criterion_widget_name]
+            criterion_widget_name = criterion + _widget
+            criterion_dict_index = 'revmaster_' + criterion
+            savedict[criterion_dict_index] = st.session_state[criterion_widget_name]
           #st.write(st.session_state[criterion_widget_name])
           st.write(savedict)
           #doc_ref.update(savedict)
