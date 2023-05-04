@@ -261,8 +261,10 @@ else:
         authorlist.append(author.strip())
     data = Counter(authorlist)
     data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
+    data_df.index = data_df.index + 1
     data_df.columns = ['Author', 'count']
     data_df = data_df.sort_values(by=['count'], ascending = False)
+    data_df.index = np.arange(1, len(df) + 1)
     wordcloud = WordCloud(background_color="white", width=1600, height=800).generate_from_frequencies(data)
     fig, ax = plt.subplots(figsize = (12, 6))
     ax.imshow(wordcloud, interpolation="bilinear")
