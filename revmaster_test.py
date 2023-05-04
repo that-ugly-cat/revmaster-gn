@@ -116,7 +116,7 @@ else:
     return ag
   ####################################
   # Tabs
-  tab1, tab2, tab3, tab4 = st.tabs(["Assessment", 'Papers per year', 'Authors', 'Lemmas'])
+  tab1, tab2, tab3, tab4 = st.tabs(["Assessment", 'Papers per year', 'Authors', 'Manual tags (= keywords)'])
   ## tab 1 (assessment)
   with tab1:
     # Main area (paper table)
@@ -269,4 +269,25 @@ else:
     plt.axis("off")
     st.pyplot(fig)
     st.bar_chart(data_df, x = 'Author', y = 'count')
+    st.write(data_df)
+  ## tab 4 (manual tags)
+  with tab4:
+    from collections import Counter
+    import matplotlib.pyplot as plt
+    from wordcloud import WordCloud
+    kwlist = []
+    for kw_block in papers_df['Manual Tags'].values.tolist():
+      kws = kw_block.split(';')
+      for kw in kws:
+        kwlist.append(kw)
+    data = Counter(kwlist)
+    data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
+    data_df.columns = ['Keyword', 'count']
+    data_df = data_df.sort_values(by=['count'], ascending = False)
+    wordcloud = WordCloud(background_color="white", width=1600, height=800).generate_from_frequencies(data)
+    fig, ax = plt.subplots(figsize = (12, 6))
+    ax.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    st.pyplot(fig)
+    st.bar_chart(data_df, x = 'Keyword', y = 'count')
     st.write(data_df)
