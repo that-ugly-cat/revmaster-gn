@@ -287,7 +287,7 @@ else:
             methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = options_methodology)
           except:
             methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = None)
-        else:
+        if study_type_widget == 'Theoretical' OR 'Viewpoint/commentary' OR 'Other':
           try:
             options_methodology = doc_asdict['revmaster_methodology']
             methodology_widget = st.text_input('Methodological notes', value = options_methodology)
