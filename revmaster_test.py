@@ -222,7 +222,7 @@ else:
               st.error('Paper already assessed as: exclude', icon = '⛔')
             if option_include == 'Maybe':
               st.info('Paper already assessed as: maybe')
-            include_widget = st.radio('Include?', include_options, index = option_index)
+            include_widget = st.radio('Include?', include_options, index = option_include_index)
           except:
             st.warning('Paper not assessed yet', icon = '⚠️')
             include_widget = st.radio('Include?', include_options, index = 0)
