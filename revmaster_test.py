@@ -116,7 +116,6 @@ else:
   except:
      st.error("Oops! There is something wrong with your methodology options file (literature review).\nThe file must be called \'methodology_options_litrev.txt\' and contain one option per row.")      
   ###
-  '''all good?'''
   @st.cache_data
   def load_data(firestore_collection):
     data = list(db.collection(firestore_collection).stream())
@@ -127,6 +126,7 @@ else:
   papers_df = load_data(initial_config.firestore_collection)
   ####################################functions
   ## show papers
+  @st.cache_data
   def show_pdf(file_path):
     with open(file_path,"rb") as f:
       base64_pdf = base64.b64encode(f.read()).decode('utf-8')
@@ -134,6 +134,7 @@ else:
     st.markdown(pdf_display, unsafe_allow_html=True)
 
   ## aggrid table
+  @st.cache_data
   def display_table(df):
     # Configure AgGrid options
     gb = GridOptionsBuilder.from_dataframe(df)
@@ -319,9 +320,7 @@ else:
             criterion_widget_name = criterion + '_widget'
             criterion_dict_index = 'revmaster_' + criterion
             savedict[criterion_dict_index] = st.session_state[criterion_widget_name]
-          #st.write(st.session_state[criterion_widget_name])
-          st.write(savedict)
-          #doc_ref.update(savedict)
+          doc_ref.update(savedict)
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
   with tab2:
