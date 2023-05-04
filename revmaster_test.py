@@ -230,9 +230,9 @@ else:
           try:
             options_country = doc_asdict['revmaster_country']
             options_country_index = []
-            study_country = st.multiselect('Country', country_options)
+            country_widget = st.multiselect('Country', country_options)
           except:
-            study_country = st.multiselect('Country', country_options)
+            country_widget = st.multiselect('Country', country_options)
           # Year
           try:
             study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
