@@ -209,15 +209,17 @@ else:
         show_pdf(pdf_file)
       with col2:
         with st.form("assessment_form"):
-          '''doc_ref = db.collection(initial_config.firestore_collection).document(paper_key)
-          doc = doc_ref.get()
-          doc_asdict = doc.to_dict()'''
           st.subheader("Assessment")
-          st.write(doc_asdict['include'])
           ## Include?
           try:
-            option = include_options.index(doc.include)
-            st.write(option)
+            option = doc_asdict['include']
+            option_index = include_options.index(option)
+            if option == 'Yes':
+              st.success('Paper already assessed (include)')
+            if option == 'No':
+              st.error('Paper already assessed (exclude)')
+            if option == ''Maybe':
+              st.info('Paper already assessed (maybe)')
             include_widget = st.radio('Include?', include_options, index = option)
           except:
             include_widget = st.radio('Include?', include_options)
