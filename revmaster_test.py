@@ -253,7 +253,7 @@ else:
   with tab3:
     from collections import Counter
     #import matplotlib.pyplot as plt
-    #from wordcloud import WordCloud
+    from wordcloud import WordCloud
     authorlist = []
     for author_block in papers_df['Author'].values.tolist():
       authors = author_block.split(';')
@@ -264,8 +264,8 @@ else:
     data_df.columns = ['Author', 'count']
     data_df = data_df.sort_values(by=['count'], ascending = False)
     st.bar_chart(data_df, x = 'Author', y = 'count')
-    '''wordcloud = WordCloud(width = 1000, height = 500).generate_from_frequencies(word_could_dict)
-    plt.figure(figsize=(15,8))
+    wordcloud = WordCloud(width = 1000, height = 500).generate_from_frequencies(word_could_dict)
+    '''plt.figure(figsize=(15,8))
     plt.imshow(wordcloud)
     plt.axis("off")
     plt.close()
