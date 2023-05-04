@@ -289,24 +289,20 @@ else:
 
         # Methodology
         if study_type_widget == 'Empirical':
+          with st.expander('See explanation of options'):
+            st.write(methodology_options_empirical_explanation)
           try:
             options_methodology = doc_asdict['revmaster_methodology']
-            with st.expander('See explanation of options'):
-              st.write(methodology_options_empirical_explanation)
             methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = options_methodology)
           except: 
-            with st.expander('See explanation of options'):
-              st.write(methodology_options_empirical_explanation)
             methodology_widget = st.multiselect('Methodology', options = methodology_options_empirical, default = None)
         if study_type_widget == 'Literature review':
+          with st.expander('See explanation of options'):
+              st.write(methodology_options_litrev_explanation)
           try:
             options_methodology = doc_asdict['revmaster_methodology']
-            with st.expander('See explanation of options'):
-              st.write(methodology_options_litrev_explanation)
             methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = options_methodology)
           except:
-            with st.expander('See explanation of options'):
-              st.write(methodology_options_litrev_explanation)
             methodology_widget = st.multiselect('Methodology', options = methodology_options_litrev, default = None)
         if study_type_widget in ['Theoretical', 'Viewpoint/commentary', 'Other']:
           try:
@@ -327,9 +323,7 @@ else:
             criterion_widget_name = criterion + '_widget'
             st.text_area(criterion, criterion_text, key = criterion_widget_name)
         save_assessment = st.button("Save")
-        
-        
-        
+
         if save_assessment:
           savedict = {'revmaster_include': include_widget, 
                     'revmaster_country': country_widget, 
