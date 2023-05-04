@@ -277,10 +277,10 @@ else:
     from wordcloud import WordCloud
     kwlist = []
     for kw_block in papers_df['Manual Tags'].values.tolist():
-      kws = kw_block.split(';')
-      st.write(kws)
-      '''for kw in kws:
-        kwlist.append(kw)
+      if isinstance(kw_block, str):
+        kws = kw_block.split(';')
+        for kw in kws:
+          kwlist.append(kw)
     data = Counter(kwlist)
     data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
     data_df.columns = ['Keyword', 'count']
@@ -291,4 +291,4 @@ else:
     plt.axis("off")
     st.pyplot(fig)
     st.bar_chart(data_df, x = 'Keyword', y = 'count')
-    st.write(data_df)'''
+    st.write(data_df)
