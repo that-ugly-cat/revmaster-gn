@@ -280,7 +280,7 @@ else:
       if isinstance(kw_block, str):
         kws = kw_block.split(';')
         for kw in kws:
-          kwlist.append(kw)
+          kwlist.append(kw.strip().lower())
     data = Counter(kwlist)
     data_df = pd.DataFrame.from_dict(data, orient='index').reset_index()
     data_df.columns = ['Keyword', 'count']
