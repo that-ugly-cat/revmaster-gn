@@ -216,11 +216,11 @@ else:
           try:
             option_include = doc_asdict['revmaster_include']
             option_include_index = include_options.index(option_include)
-            if option == 'Yes':
+            if option_include == 'Yes':
               st.success('Paper already assessed as: include', icon = '👌')
-            if option == 'No':
+            if option_include == 'No':
               st.error('Paper already assessed as: exclude', icon = '⛔')
-            if option == 'Maybe':
+            if option_include == 'Maybe':
               st.info('Paper already assessed as: maybe')
             include_widget = st.radio('Include?', include_options, index = option_index)
           except:
