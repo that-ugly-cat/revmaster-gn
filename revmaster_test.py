@@ -411,4 +411,4 @@ else:
       with st.spinner('Wait for it...'):
         papers_df_export = export_data(initial_config.firestore_collection)
         papers_df_export.to_excel('RevMaster assessment.xlsx')
-        st.download_button(label = 'Download', file_name = 'RevMaster assessment.xlsx', mime="application/vnd.ms-excel")
+        st.download_button(label = 'Download', file_name = 'RevMaster assessment.xlsx', data = file_name = 'RevMaster assessment.xlsx', mime="application/vnd.ms-excel")
