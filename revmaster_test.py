@@ -232,11 +232,10 @@ else:
             options_country_index = []
             for x in options_country:
               options_country_index.append(country_options.index(x))
-            st.write(options_country)
-            st.write(type(options_country))
-            country_widget = st.multiselect('Country', country_options, default = options_country_index)
+            st.text(options_country)
+            country_widget = st.multiselect('Country', options = country_options, default = options_country)
           except:
-            country_widget = st.multiselect('Country', country_options, default = None)
+            country_widget = st.multiselect('Country', options = country_options, default = None)
           # Year
           try:
             study_year_value = int(papers_df[papers_df['Key'] == paper_key]['Year'].values[0])
