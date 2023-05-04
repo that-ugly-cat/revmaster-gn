@@ -299,11 +299,11 @@ else:
         for criterion in initial_config.criteria:
           try:
             criterion_text = doc_asdict[criterion]
-            criterion_widget_name = criterion + _widget
+            criterion_widget_name = criterion + '_widget'
             st.text_area(criterion, criterion_text, key = criterion_widget_name)
           except:
             criterion_text = ''
-            criterion_widget_name = criterion + _widget
+            criterion_widget_name = criterion + '_widget'
             st.text_area(criterion, criterion_text, key = criterion_widget_name)
         save_assessment = st.button("Save")
         
@@ -316,7 +316,7 @@ else:
                     'revmaster_study_type' : study_type_widget, 
                     'revmaster_methodology' : methodology_widget}
           for criterion in initial_config.criteria:
-            criterion_widget_name = criterion + _widget
+            criterion_widget_name = criterion + '_widget'
             criterion_dict_index = 'revmaster_' + criterion
             savedict[criterion_dict_index] = st.session_state[criterion_widget_name]
           #st.write(st.session_state[criterion_widget_name])
