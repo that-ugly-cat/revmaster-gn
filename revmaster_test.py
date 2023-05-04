@@ -217,15 +217,15 @@ else:
             option = doc_asdict['include']
             option_index = include_options.index(option)
             if option == 'Yes':
-              st.success('Paper already assessed (include)')
+              st.success('Paper already assessed as: include')
             if option == 'No':
-              st.error('Paper already assessed (exclude)')
+              st.error('Paper already assessed as: exclude')
             if option == 'Maybe':
-              st.info('Paper already assessed (maybe)')
+              st.info('Paper already assessed as: maybe')
             include_widget = st.radio('Include?', include_options, index = option_index)
           except:
-            include_widget = st.radio('Include?', include_options)
             st.warning('Paper not assessed yet', icon="⚠️")
+            include_widget = st.radio('Include?', include_options)
           ## Country
           try:
             study_country = st.multiselect('Country', country_options)
@@ -252,7 +252,8 @@ else:
               criterion_widget = st.text_area(criterion, criterion_text)
           save_assessment = st.form_submit_button("Save")
         if save_assessment:
-          doc.update({include: include_widget})
+          st.text(include_widget)
+          #doc.update({include: include_widget})
           st.success('Saved!')
   ## tab 2 (papers per year)###############################################
   with tab2:
