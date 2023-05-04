@@ -264,7 +264,7 @@ else:
     data_df.columns = ['Author', 'count']
     data_df = data_df.sort_values(by=['count'], ascending = False)
     st.bar_chart(data_df, x = 'Author', y = 'count')
-    wordcloud = WordCloud(width = 1000, height = 500).generate_from_frequencies(data)
+    wordcloud = WordCloud().generate_from_frequencies(frequencies=data)
     plt.figure(figsize=(15,8))
     plt.imshow(wordcloud)
     plt.axis("off")
