@@ -48,9 +48,9 @@ if 'initial_config.py' not in config_files:
       ###
       st.subheader('Upload your firestore key file')
       st.text('The key file can be generated from your firestore account.')
-      uploaded_file = st.file_uploader("Choose a file")
-      if uploaded_file is not None:
-        with open("firestore-key.json") as json_file:
+      uploaded_key = st.file_uploader("Choose a file")
+      if uploaded_key is not None:
+        with open(uploaded_key) as json_file:
           json_text = json_file.read()
           config = {"textkey": json_text}
           toml_config = toml.dumps(config)
