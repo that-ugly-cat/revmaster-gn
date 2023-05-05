@@ -57,7 +57,7 @@ if 'initial_config.py' not in config_files:
         st.subheader('Copy this in your streamlit secrets:')
         st.text(type(config))
         for key, item in config.items():
-          item = item.decode('utf-8)
+          item = item.decode('utf-8')
           st.text(key)
           st.text(type(item))
           st.text(item)
