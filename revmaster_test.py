@@ -59,7 +59,7 @@ if 'initial_config.py' not in config_files:
         with open('temp_toml.txt', "r") as target:
           babba = target.read()
         st.subheader('Copy this in your streamlit secrets:')
-        st.text(babba)
+        st.code(babba)
         #st.write(toml_config)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
         #key_dict = json.loads(config)
