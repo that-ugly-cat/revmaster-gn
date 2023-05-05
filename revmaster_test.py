@@ -54,10 +54,7 @@ if 'initial_config.py' not in config_files:
         json_text = uploaded_key.read().decode('utf-8')
         config = {"textkey": json_text}
         toml_config = toml.dumps(config)
-        with open('temp_toml.txt', "w") as target:
-          target.write(toml_config)
-        with open('temp_toml.txt', "r") as target:
-          babba = target.read()
+        toml_config = toml_config.replace('\n', '  \n')
         st.subheader('Copy this in your streamlit secrets:')
         st.markdown(babba)
         #st.write(toml_config)
