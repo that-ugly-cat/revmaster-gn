@@ -50,14 +50,16 @@ if 'initial_config.py' not in config_files:
       st.write('The key file can be generated from your firestore account, see [here for details](https://blog.streamlit.io/streamlit-firestore/).')
       uploaded_key = st.file_uploader("Choose a file", type = ['json'], key = 'upload_key_widget')
       if uploaded_key is not None:
-        with open(uploaded_key) as json_file:
+        json_text = uploaded_key.read()
+        st.write(json_text)
+        '''with open(uploaded_key) as json_file:
           json_text = json_file.read()
           config = {"textkey": json_text}
           toml_config = toml.dumps(config)
           output_file = ".streamlit/secrets.toml"
         with open(output_file, "w") as target:
           target.write(toml_config)
-        gitpush.git_save(output_file, git_user, git_token, git_repo)
+        gitpush.git_save(output_file, git_user, git_token, git_repo)'''
 
       ###      
       save_1 = st.form_submit_button("Save")
@@ -96,7 +98,7 @@ else:
   ###
   st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
   st.header(initial_config.project_title)
-  st.text(initial_config.project_description)
+  st.write(initial_config.project_description)
   ###
   # load country options
   try:
