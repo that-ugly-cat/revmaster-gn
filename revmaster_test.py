@@ -2,10 +2,15 @@ import pandas as pd
 import streamlit as st
 from io import StringIO, BytesIO
 import base64
+import toml
 from st_aggrid import AgGrid, GridOptionsBuilder
 import os
 import gitpush
 from google.cloud import firestore
+
+git_user = st.secrets['github_user']
+git_token = st.secrets['github_token']
+git_repo = st.secrets['github_repo']
 
 # Initial configurations
 ####################################
@@ -41,6 +46,20 @@ if 'initial_config.py' not in config_files:
         papers_df = pd.read_csv(uploaded_file)
         st.write(papers_df)
       ###
+      st.subheader('Upload your firestore key file')
+      st.text('The key file can be generated from your firestore account.')
+      uploaded_file = st.file_uploader("Choose a file")
+      if uploaded_file is not None:
+        with open("firestore-key.json") as json_file:
+        json_text = json_file.read()
+        config = {"textkey": json_text}
+        toml_config = toml.dumps(config)
+        output_file = ".streamlit/secrets.toml"
+        with open(output_file, "w") as target:
+          target.write(toml_config)
+        gitpush.git_save(output_file, git_user, git_token, git_repo)
+
+      ###      
       save_1 = st.form_submit_button("Save")
       if save_1:
         with open('initial_config.py', 'w') as f:
@@ -65,10 +84,8 @@ if 'initial_config.py' not in config_files:
             doc_ref.set(item)
         st.success('Done!')
         ###
-        user = st.secrets['github_user']
-        token = st.secrets['github_token']
-        repo = st.secrets['github_repo']
-        gitpush.git_save('initial_config.py', user, token, repo)
+        
+        gitpush.git_save('initial_config.py', git_user, git_token, git_repo)
 
 else:
   ################### with everything configured###################
