@@ -57,7 +57,8 @@ if 'initial_config.py' not in config_files:
         st.subheader('Copy this in your streamlit secrets:')
         st.text(toml_config)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
-        key_dict = json.loads(st.secrets["textkey"])
+        key_dict = json.loads(config)
+        st.write(key_dict)
         creds = st.secrets["textkey"]
         #st.write(key_dict)
         #db = firestore.Client(credentials=creds, project="revmaster_test")
