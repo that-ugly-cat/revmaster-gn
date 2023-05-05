@@ -58,6 +58,7 @@ if 'initial_config.py' not in config_files:
         #output_file = "test.toml"
         #with open(output_file, "w") as target:
         #  target.write(toml_config)
+        st.text(type(toml_config))
         st.text(toml_config)
         st.text(config)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
