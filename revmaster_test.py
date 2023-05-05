@@ -57,7 +57,10 @@ if 'initial_config.py' not in config_files:
         st.subheader('Copy this in your streamlit secrets:')
         toml_config_decode = toml_config.replace('textkey = [ ', '').replace(',]', '')
         toml_config_decode = toml_config_decode.split(', ')
-        st.write(toml_config_decode)
+        decode_list = []
+        for x in toml_config_decode:
+          decode_list.append(char(x))
+        st.write(decode_list)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
         #key_dict = json.loads(config)
         #st.write(key_dict)
