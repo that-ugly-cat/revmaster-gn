@@ -48,7 +48,7 @@ if 'initial_config.py' not in config_files:
       ###
       st.subheader('Upload your firestore key file')
       st.text('The key file can be generated from your firestore account.')
-      uploaded_key = st.file_uploader("Choose a file"type = ['json'], key = 'upload_key_widget')
+      uploaded_key = st.file_uploader("Choose a file", type = ['json'], key = 'upload_key_widget')
       if uploaded_key is not None:
         with open(uploaded_key) as json_file:
           json_text = json_file.read()
