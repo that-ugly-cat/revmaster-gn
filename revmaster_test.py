@@ -51,12 +51,13 @@ if 'initial_config.py' not in config_files:
       st.write('The key file can be generated from your firestore account, see [here for details](https://blog.streamlit.io/streamlit-firestore/).')
       uploaded_key = st.file_uploader("Choose a file", type = ['json'], key = 'upload_key_widget')
       if uploaded_key is not None:
-        json_text = str(uploaded_key.read())
+        uploaded_key = uploaded_key.decode('utf-8')
+        json_text = uploaded_key.read()
         config = {"textkey": json_text}
         toml_config = toml.dumps(config)
         st.subheader('Copy this in your streamlit secrets:')
         st.text(type(config))
-        st.text(config)
+        st.text(toml_config)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
         #key_dict = json.loads(config)
         #st.write(key_dict)
