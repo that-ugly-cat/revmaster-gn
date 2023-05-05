@@ -47,7 +47,7 @@ if 'initial_config.py' not in config_files:
         st.write(papers_df)
       ###
       st.subheader('Upload your firestore key file')
-      st.text('The key file can be generated from your firestore account.')
+      st.text('The key file can be generated from your firestore account, see [here for details](https://blog.streamlit.io/streamlit-firestore/).')
       uploaded_key = st.file_uploader("Choose a file", type = ['json'], key = 'upload_key_widget')
       if uploaded_key is not None:
         with open(uploaded_key) as json_file:
