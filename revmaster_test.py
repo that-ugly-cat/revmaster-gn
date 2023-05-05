@@ -55,7 +55,7 @@ if 'initial_config.py' not in config_files:
         config = {"textkey": json_text}
         toml_config = toml.dumps(config)
         st.subheader('Copy this in your streamlit secrets:')
-        st.text(type(config))
+        st.text(config)
         st.text(toml_config)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
         #key_dict = json.loads(config)
