@@ -53,7 +53,7 @@ if 'initial_config.py' not in config_files:
       if uploaded_key is not None:
         json_text = uploaded_key.read()
         config = {"textkey": json_text}
-        toml_config = toml.dump(config)
+        toml_config = toml.dumps(config)
         st.subheader('Copy this in your streamlit secrets:')
         st.text(type(config))
         st.write(toml_config)
