@@ -59,9 +59,10 @@ if 'initial_config.py' not in config_files:
         #with open(output_file, "w") as target:
         #  target.write(toml_config)
         st.write(toml_config)
+        st.write(config)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
-        key_dict = json.loads(st.secrets["textkey"])
-        st.write(key_dict)
+        #st.secrets["textkey"]
+        #st.write(key_dict)
 
       ###      
       save_1 = st.form_submit_button("Save")
