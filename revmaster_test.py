@@ -58,6 +58,7 @@ if 'initial_config.py' not in config_files:
         st.text(type(config))
         for key, item in config.items():
           st.text(key)
+          st.text(type(item))
           st.text(item)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
         #key_dict = json.loads(config)
