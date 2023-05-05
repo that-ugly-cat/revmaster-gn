@@ -41,14 +41,14 @@ if 'initial_config.py' not in config_files:
       st.subheader('Upload the CSV file containing your papers to be assessed.')
       st.text('The file should contain at least the following columns to function properly: Key (unique identifier), Publication Year, Author, Title.')
       st.text('The code is tested and optimized for Zotero collection exports.')
-      uploaded_file = st.file_uploader("Choose a file")
+      uploaded_file = st.file_uploader("Choose a file", type = ['csv'], key = 'upload_csv_widget')
       if uploaded_file is not None:
         papers_df = pd.read_csv(uploaded_file)
         st.write(papers_df)
       ###
       st.subheader('Upload your firestore key file')
       st.text('The key file can be generated from your firestore account.')
-      uploaded_key = st.file_uploader("Choose a file")
+      uploaded_key = st.file_uploader("Choose a file"type = ['json'], key = 'upload_key_widget')
       if uploaded_key is not None:
         with open(uploaded_key) as json_file:
           json_text = json_file.read()
