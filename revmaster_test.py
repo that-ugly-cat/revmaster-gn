@@ -59,7 +59,7 @@ if 'initial_config.py' not in config_files:
         toml_config_decode = toml_config_decode.split(', ')
         decode_list = []
         for x in toml_config_decode:
-          decode_list.append(chr(x))
+          decode_list.append(chr(int(x)))
         ''.join(decode_list)  
         st.write(decode_list)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
