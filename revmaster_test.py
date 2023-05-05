@@ -54,16 +54,12 @@ if 'initial_config.py' not in config_files:
         json_text = uploaded_key.read()
         config = {"textkey": json_text}
         toml_config = toml.dumps(config)
-        #output_file = ".streamlit/secrets.toml"
-        #output_file = "test.toml"
-        #with open(output_file, "w") as target:
-        #  target.write(toml_config)
-        st.text(type(toml_config))
+        st.subheader('Copy this in your streamlit secrets:')
         st.text(toml_config)
-        st.text(config)
         #gitpush.git_save(output_file, git_user, git_token, git_repo)
-        #st.secrets["textkey"]
+        creds = st.secrets["textkey"]
         #st.write(key_dict)
+        db = firestore.Client(credentials=creds, project="revmaster_test")
 
       ###      
       save_1 = st.form_submit_button("Save")
