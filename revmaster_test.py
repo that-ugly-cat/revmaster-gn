@@ -60,32 +60,33 @@ if 'initial_config.py' not in config_files:
         gitpush.git_save(output_file, git_user, git_token, git_repo)
 
       ###      
-      save_1 = st.form_submit_button("Save")
-      if save_1:
-        with open('initial_config.py', 'w') as f:
-          l1 = 'project_title = \'' + project_title + '\'\n'
-          l2 = 'project_description = \'' + project_description + '\'\n'
-          criteria = criteria.split('\n')
-          critlist = 'criteria = ['
-          last_item = criteria[-1]
-          for criterion in criteria:
-            if criterion != last_item:
-              critlist = critlist + '\'' + criterion + '\', '
-            if criterion == last_item:
-              critlist = critlist + '\'' + criterion + '\']\n'
-          l3 = critlist
-          l4 = 'firestore_collection = \'' + firestore_collection + '\'\n'
-          f.writelines([l1, l2, l3, l4])
-        ###
-        df_as_dict = papers_df.to_dict('index')
-        with st.spinner('Wait for it...'):
-          for key, item in df_as_dict.items():
-            doc_ref = db.collection(firestore_collection).document(item['Key'])
-            doc_ref.set(item)
-        st.success('Done!')
-        ###
-        
+    save_1 = st.form_submit_button("Save")
+    if save_1:
+      with open('initial_config.py', 'w') as f:
+        l1 = 'project_title = \'' + project_title + '\'\n'
+        l2 = 'project_description = \'' + project_description + '\'\n'
+        criteria = criteria.split('\n')
+        critlist = 'criteria = ['
+        last_item = criteria[-1]
+        for criterion in criteria:
+          if criterion != last_item:
+            critlist = critlist + '\'' + criterion + '\', '
+          if criterion == last_item:
+            critlist = critlist + '\'' + criterion + '\']\n'
+        l3 = critlist
+        l4 = 'firestore_collection = \'' + firestore_collection + '\'\n'
+        f.writelines([l1, l2, l3, l4])
+      ###
+      with st.spinner('Wait for it...'):
         gitpush.git_save('initial_config.py', git_user, git_token, git_repo)
+        df_as_dict = papers_df.to_dict('index')
+        for key, item in df_as_dict.items():
+          doc_ref = db.collection(firestore_collection).document(item['Key'])
+          doc_ref.set(item)
+      st.success('Done!')
+      ###
+        
+        
 
 else:
   ################### with everything configured###################
