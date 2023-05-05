@@ -6,7 +6,6 @@ streamlit-aggrid
 requests
 google-cloud-firestore
 toml
-json
 wordcloud
 matplotlib
 XlsxWriter
