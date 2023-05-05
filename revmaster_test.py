@@ -54,11 +54,11 @@ if 'initial_config.py' not in config_files:
         config = {"textkey": json_text}
         toml_config = toml.dumps(config)
         #output_file = ".streamlit/secrets.toml"
-        #output_file = "test.toml"
+        output_file = "test.toml"
         with open(output_file, "w") as target:
           target.write(toml_config)
         st.write(toml_config)
-        #gitpush.git_save(output_file, git_user, git_token, git_repo)
+        gitpush.git_save(output_file, git_user, git_token, git_repo)
 
       ###      
       save_1 = st.form_submit_button("Save")
