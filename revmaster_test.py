@@ -51,10 +51,10 @@ if 'initial_config.py' not in config_files:
       uploaded_file = st.file_uploader("Choose a file")
       if uploaded_file is not None:
         with open("firestore-key.json") as json_file:
-        json_text = json_file.read()
-        config = {"textkey": json_text}
-        toml_config = toml.dumps(config)
-        output_file = ".streamlit/secrets.toml"
+          json_text = json_file.read()
+          config = {"textkey": json_text}
+          toml_config = toml.dumps(config)
+          output_file = ".streamlit/secrets.toml"
         with open(output_file, "w") as target:
           target.write(toml_config)
         gitpush.git_save(output_file, git_user, git_token, git_repo)
