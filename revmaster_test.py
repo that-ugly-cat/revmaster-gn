@@ -49,7 +49,7 @@ if 'initial_config.py' not in config_files:
              
   if firebase_connected == 'yes':
     st.write(st.secrets.firebase)
-    db = firestore.Client.from_service_account_json("firestore-key.json")
+    db = firestore.Client.from_service_account_json(st.secrets.firebase)
 
     with st.form("form_1"):
       project_title = st.text_input('Project title', '...')
