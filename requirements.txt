@@ -3,10 +3,12 @@ streamlit
 openpyxl
 pybase64
 streamlit-aggrid
+supabase
 requests
+mysql-connector-python
 google-cloud-firestore
-toml
 wordcloud
 matplotlib
 XlsxWriter
 pyxlsb
+spacy
