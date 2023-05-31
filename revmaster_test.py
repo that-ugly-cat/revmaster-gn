@@ -38,6 +38,7 @@ if 'initial_config.py' not in config_files:
     st.error('No firestore configuration found.')
     st.write('This app requires access to a firestore database. To do so safely, access details need to be saved in the app\'s secrets.')
     st.write('Load Firebase\'s JSON file.')
+    st.write('More info on Firestora and on the retrieval of your JSON service account key [here](https://blog.streamlit.io/streamlit-firestore/))
     uploaded_json = st.file_uploader("Choose a file")
     if uploaded_json is not None:
       json_content = uploaded_json.getvalue().decode('utf-8')
@@ -47,6 +48,7 @@ if 'initial_config.py' not in config_files:
 
              
   if firebase_connected == 'yes':
+    st.write(st.secrets.firebase)
     db = firestore.Client.from_service_account_json("firestore-key.json")
 
     with st.form("form_1"):
