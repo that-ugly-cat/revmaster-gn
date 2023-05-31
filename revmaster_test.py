@@ -48,8 +48,10 @@ if 'initial_config.py' not in config_files:
 
              
   if firebase_connected == 'yes':
-    st.write(st.secrets.firebase)
-    db = firestore.Client.from_service_account_json(st.secrets.firebase)
+    with open('auth.json', 'w') as f:
+      json.dump(st.secrets.firebase, f)
+
+    db = firestore.Client.from_service_account_json('auth.json')
 
     with st.form("form_1"):
       project_title = st.text_input('Project title', '...')
