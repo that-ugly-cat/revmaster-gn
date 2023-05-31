@@ -10,4 +10,4 @@
   - github_repo = 'your repo'
   - github_token = 'your token'
 - launch the app and go through the setup process
-- ...
+  - 
