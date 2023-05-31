@@ -115,7 +115,7 @@ if 'initial_config.py' not in config_files:
         token = st.secrets['github_token']
         repo = st.secrets['github_repo']
         gitpush.git_save('initial_config.py', user, token, repo)
-        st.success('All good. now the last step: upload your papers / documents in your GitHub repository, in the folder \'/pdfs\'. The software uses the author names and the publication title to find the PDF files based on the database entry, so make sure your files are named as follows:\n\nSurname - title.pdf, or\n\nSurname1, Surname2 - title.pdf, or\n\nSurname1, Surname2 et al - title.pdf (this is the default file name for files exported from Citavi.)
+        st.success('All good. now the last step: upload your papers / documents in your GitHub repository, in the folder \'/pdfs\'. The software uses the author names and the publication title to find the PDF files based on the database entry, so make sure your files are named as follows:\n\nSurname - title.pdf, or\n\nSurname1, Surname2 - title.pdf, or\n\nSurname1, Surname2 et al - title.pdf (this is the default file name for files exported from Citavi.')
 
 else:
   ################### with everything configured###################
