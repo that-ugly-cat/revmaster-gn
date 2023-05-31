@@ -1,7 +1,7 @@
 # RevMaster documentation
-Reviews of academic literature are often conducted with a rather medieval approach: we basically record annotations on a big excel spreadsheet. Every row is a paper, and every column is either a known or an unknown information. 
+Reviews of academic literature are often conducted with a rather medieval approach: we basically record annotations on a big excel spreadsheet. Every row is a paper, and every column is either a known or an unknown piece of information. You read what you have, and fill the blanks.
 
-You open up your excel file, you open your paper's PDF, read, and annotate. Boring and clumsy. And extremely single-user. And not amazing for ongoing assessments. 
+You open up your excel file, you open your paper's PDF, read, and annotate. Boring and clumsy. And extremely poor at multi-user. And not amazing for ongoing assessments. 
 
 So I've put together this piece of code to speed up and systematize the process a little bit. 
 ![streamlit-revmaster-2023-05-31-17-05-06.webm](https://github.com/that-ugly-cat/revmaster/assets/98877284/78f0dabc-e45f-4d53-9c8d-96edfc1fea54)
@@ -32,6 +32,16 @@ I plan to introduce more functions as soon as I have time - ideally automate the
     - the CSV file containing your papers to be assessed: the file should contain at least the following columns to function properly: Key (used as unique identifier), Publication Year, Author, Title. I use an export from Zotero, works amazingly well.
     - save: this will record all the details and set up the environment. 
   - upload the PDF files in your github repository, in the folder '/pdfs'. The software uses the author names and the publication title to find the PDF files based on the database entry, so make sure your files are named as follows: Surname - title.pdf, or Surname1, Surname2 - title.pdf, or Surname1, Surname2 et al - title.pdf (this is the default file name for files exported from Citavi.
+
+## Workflow
+- You do your literature search (ideally with a [smart iterative approach](https://www.sciencedirect.com/science/article/pii/S2405844020312706) using my [TopicTracker](https://zenodo.org/record/7023618))
+- Once you're happy with the query, download and import the database entries in your reference manager, such as Zotero or Citavi.
+- Do your first screening (inclusion/exclusion based on title/abstract) in your reference manager.
+- Export from your reference manager a csv file containing all the papers which passed the 1st screening. 
+- Download the PDFs of these papers
+- Create your RevMaster project, configure everything, load the files, and do your assessment.
+- Read the results from a high level perspective (NLP analysis) via RevMaster's interface
+- ...and then from a closer perspective (manual evidence synthesis) exporting your final excel file and confronting the content of the assessments.
 
 ## Use
 ### Assessment mode
