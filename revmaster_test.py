@@ -45,6 +45,7 @@ if 'initial_config.py' not in config_files:
       json_content = '[firebase]\n' + json_content
       json_content = json_content.replace('{\n', '').replace('\n}', '').replace(',\n  \"', '\n').replace('\n  \"', '\n').replace('\": \"', ' = \"')
       txt = st.text_area('Copy this into your streamlit app\'s secrets, right below the GitHub secrets:', value = json_content )
+      st.info('Once copied this text in your secrets, wait 30 seconds and then reload this page.')
 
              
   if firebase_connected == 'yes':
