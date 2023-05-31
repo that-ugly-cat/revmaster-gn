@@ -57,7 +57,7 @@ if 'initial_config.py' not in config_files:
 
     with st.form("form_1"):
       project_title = st.text_input('Project title', '', help = 'e.g.: Ethical considerations on social listening and infodemic management: a scoping review. Displayed on the top of the page.')
-      project_description = st.text_area('Project description', '', help = 'Any other information to let users understand what the prpoject is about. Displayed on the top of the page, below the title. Ideally no more than 2-3 lines of text.')
+      project_description = st.text_area('Project description', '', help = 'Any other information to let users understand what the project is about. Displayed on the top of the page, below the title. Ideally no more than 2-3 lines of text.')
       st.divider()
       inclusion_criteria = st.text_area('Inclusion criteria', 'Note them down here to have them in the assessment interface.', help = 'e.g.: - full text is available AND -full text mentions social listening or infodemic management AND -full text mentions outbreak, epidemic, pandemic OR -full text mentions public health, risk for public health, public health emergency, AND -full text mentions ethics or ethical aspects AND -full text in English.')
       criteria = st.text_area('Assessment criteria', 'one\nper\nline', help = 'e.g.: -characterization of infodemic; -characterization of infodemic management; -ethical issues in infodemics; ...')
