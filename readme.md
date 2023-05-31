@@ -10,7 +10,7 @@ The software lets you analyse the data in real time, as you are assessing your d
 ![streamlit-revmaster-2023-05-31-17-05-21.webm](https://github.com/that-ugly-cat/revmaster/assets/98877284/9ccb2821-9474-4b0a-a436-6fa01f87e09d)
 
 I plan to introduce more functions as soon as I have time - ideally automate the retrieval of the full text files, and potentially integrate the iterative search pipeline (see: [TopicTracker](https://zenodo.org/record/7023618))
-## Installation
+## Setup
 - fork this git repo
 - Generate a new [personal access token (classic)](https://github.com/settings/tokens) - more info [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 - note down your username, repo name and access token 
@@ -48,3 +48,8 @@ When you activate the 'analysis mode' you will get more tabs, all of them quite 
 - manual tags: frequency analysis of the keywords and mesh terms 
 - analysis(assessments): NLP analysis (lemma frequency) of the content of the included assessments
 - analysis(document details): country, study year, study type, methodology.
+
+## Customization
+Assessment criteria are defined upon creation of a new project. However, if for any reason you want to change **the options displayed in the 'study type' or in the 'methodology' widgets,** all of them can be configured by editing the files contained in /configs. Just remember, one option per line. I do **NOT** suggest modifying the options if you have already started the assessment (as this could lead to data loss and inconsistencies) (unless you exactly know what you are doing and why).
+
+If you need to change the **project title, or the description, or the inclusion criteria** (or any other information specified during the setup), all this information comes from the file 'initial_config.py', which you can manually modify if need be. However, I do **NOT** suggest modifying the criteria if you have already started the assessment (as this could lead to data loss and inconsistencies) (unless you exactly know what you are doing and why).
