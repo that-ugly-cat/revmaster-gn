@@ -29,7 +29,7 @@ if 'initial_config.py' not in config_files:
   st.subheader('No configuration found.')
   st.subheader('Let\'s set up a new project')
   try: 
-    st.secrets.firebase.type
+    test_firebase_auth = st.secrets.firebase.type
     firebase_connected = 'yes'
   except:
     firebase_connected = 'no'
