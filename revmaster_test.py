@@ -34,10 +34,10 @@ if 'initial_config.py' not in config_files:
     st.write('This app requires access to a firestore database. To do so safely, access details need to be saved in the app\'s secrets.')
     st.write('Load Firebase\'s JSON file.')
     uploaded_json = st.file_uploader("Choose a file")
-      if uploaded_json is not None:
-        json_content = open(uploaded_json, 'r')
-        txt = st.text_area('Copy this to your streamlit app\'s secrets:', value = json_content )
-      
+    if uploaded_json is not None:
+      json_content = open(uploaded_json, 'r')
+      txt = st.text_area('Copy this to your streamlit app\'s secrets:', value = json_content )
+
              
   else:
     db = firestore.Client.from_service_account_json("firestore-key.json")
