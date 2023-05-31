@@ -28,8 +28,13 @@ if 'initial_config.py' not in config_files:
   st.header('RevMaster setup')
   st.subheader('No configuration found.')
   st.subheader('Let\'s set up a new project')
-  
-  if not st.secrets.firebase:
+  try: 
+    st.secrets.firebase
+    firebase_connected = 'yes'
+  except:
+    firebase_connected = 'no'
+    
+  if firebase_connected == 'no':
     st.error('No firestore configuration found.')
     st.write('This app requires access to a firestore database. To do so safely, access details need to be saved in the app\'s secrets.')
     st.write('Load Firebase\'s JSON file.')
@@ -39,7 +44,7 @@ if 'initial_config.py' not in config_files:
       txt = st.text_area('Copy this to your streamlit app\'s secrets:', value = json_content )
 
              
-  else:
+  if firebase_connected == 'yes':
     db = firestore.Client.from_service_account_json("firestore-key.json")
 
     with st.form("form_1"):
