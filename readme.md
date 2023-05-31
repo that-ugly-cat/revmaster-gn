@@ -4,10 +4,10 @@ Reviews of academic literature are often conducted with a rather medieval approa
 You open up your excel file, you open your paper's PDF, read, and annotate. Boring and clumsy. And extremely single-user. And not amazing for ongoing assessments. 
 
 So I've put together this piece of code to speed up and systematize the process a little bit. 
-[streamlit-revmaster-2023-05-31-17-05-06.webm](https://github.com/that-ugly-cat/revmaster/assets/98877284/78f0dabc-e45f-4d53-9c8d-96edfc1fea54)
+![streamlit-revmaster-2023-05-31-17-05-06.webm](https://github.com/that-ugly-cat/revmaster/assets/98877284/78f0dabc-e45f-4d53-9c8d-96edfc1fea54)
 
 The software lets you analyse the data in real time, as you are assessing your documents. Which can come in handy when you need to present intermediate results.
-[streamlit-revmaster-2023-05-31-17-05-21.webm](https://github.com/that-ugly-cat/revmaster/assets/98877284/9ccb2821-9474-4b0a-a436-6fa01f87e09d)
+![streamlit-revmaster-2023-05-31-17-05-21.webm](https://github.com/that-ugly-cat/revmaster/assets/98877284/9ccb2821-9474-4b0a-a436-6fa01f87e09d)
 
 I plan to introduce more functions as soon as I have time - ideally automate the retrieval of the full text files, and potentially integrate the iterative search pipeline (see: [TopicTracker](https://zenodo.org/record/7023618))
 ## Installation
