@@ -40,7 +40,7 @@ if 'initial_config.py' not in config_files:
     st.write('Load Firebase\'s JSON file.')
     uploaded_json = st.file_uploader("Choose a file")
     if uploaded_json is not None:
-      json_content = open(uploaded_json, 'r')
+      json_content = open(uploaded_json.getvalue().decode('utf-8', 'r')
       txt = st.text_area('Copy this to your streamlit app\'s secrets:', value = json_content )
 
              
