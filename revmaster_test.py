@@ -50,7 +50,7 @@ if 'initial_config.py' not in config_files:
   if firebase_connected == 'yes':
     import json
     with open('auth.json', 'w') as f:
-      json.dump(st.secrets.firebase, f)
+      json.dump(dict(st.secrets.firebase), f)
 
     db = firestore.Client.from_service_account_json('auth.json')
 
