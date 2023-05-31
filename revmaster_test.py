@@ -56,13 +56,13 @@ if 'initial_config.py' not in config_files:
     db = firestore.Client.from_service_account_json('auth.json')
 
     with st.form("form_1"):
-      project_title = st.text_input('Project title', '...')
-      project_description = st.text_area('Project description', '...')
+      project_title = st.text_input('Project title', '', help = 'e.g.: Ethical considerations on social listening and infodemic management: a scoping review. Displayed on the top of the page.')
+      project_description = st.text_area('Project description', '', help = 'Any other information to let users understand what the prpoject is about. Displayed on the top of the page, below the title. Ideally no more than 2-3 lines of text.')
       st.divider()
-      inclusion_criteria = st.text_area('Inclusion criteria', 'Note them down here to have them in the assessment interface.')
-      criteria = st.text_area('Assessment criteria', 'one\nper\nline')
+      inclusion_criteria = st.text_area('Inclusion criteria', 'Note them down here to have them in the assessment interface.', help = 'e.g.: - full text is available AND -full text mentions social listening or infodemic management AND -full text mentions outbreak, epidemic, pandemic OR -full text mentions public health, risk for public health, public health emergency, AND -full text mentions ethics or ethical aspects AND -full text in English.
+      criteria = st.text_area('Assessment criteria', 'one\nper\nline', help = 'e.g.: -characterization of infodemic; -characterization of infodemic management; -ethical issues in infodemics; ...')
       st.divider()
-      firestore_collection = st.text_input('Firestore collection', '')
+      firestore_collection = st.text_input('Firestore collection', '' help = 'No spaces, no special characters. e.g.: infodemics-review-31052023')
       ###
       st.divider()
       st.subheader('Here we create a user with read and write rights on your data.')
@@ -72,7 +72,7 @@ if 'initial_config.py' not in config_files:
       st.divider()
       ###
       st.subheader('Upload the CSV file containing your papers to be assessed.')
-      st.write('The file should contain at least the following columns to function properly: Key (unique identifier), Publication Year, Author, Title.')
+      st.write('The file should contain at least the following columns to function properly: Key (used as unique identifier), Publication Year, Author, Title.')
       st.write('The code is tested and optimized for Zotero collection exports.')
       uploaded_file = st.file_uploader("Choose a file")
       if uploaded_file is not None:
