@@ -15,7 +15,6 @@ git_repo = st.secrets['github_repo']
 # Initial configurations
 ####################################
 
-db = firestore.Client.from_service_account_json("firestore-key.json")
 
 config_files = os.listdir('.')
 
@@ -30,66 +29,79 @@ if 'initial_config.py' not in config_files:
   st.subheader('No configuration found.')
   st.subheader('Let\'s set up a new project')
   
-  with st.form("form_1"):
-    project_title = st.text_input('Project title', '...')
-    project_description = st.text_area('Project description', '...')
-    st.divider()
-    inclusion_criteria = st.text_area('Inclusion criteria', 'Note them down here to have them in the assessment interface.')
-    criteria = st.text_area('Assessment criteria', 'one\nper\nline')
-    st.divider()
-    firestore_collection = st.text_input('Firestore collection', '')
-    ###
-    st.divider()
-    st.subheader('Here we create a user with read and write rights on your data.')
-    new_user = st.text_input('Username')
-    new_password = st.text_input('Password')
-    st.info('Note down your password as for the time being I did not develop a password recovery tool!')
-    st.divider()
-    ###
-    st.subheader('Upload the CSV file containing your papers to be assessed.')
-    st.write('The file should contain at least the following columns to function properly: Key (unique identifier), Publication Year, Author, Title.')
-    st.write('The code is tested and optimized for Zotero collection exports.')
-    uploaded_file = st.file_uploader("Choose a file")
-    if uploaded_file is not None:
-      papers_df = pd.read_csv(uploaded_file)
-      st.write(papers_df)
-    ###
+  if not st.secrets.firebase:
+    st.error('No firestore configuration found.')
+    st.write('This app requires access to a firestore database. To do so safely, access details need to be saved in the app\'s secrets.')
+    st.write('Load Firebase\'s JSON file.')
+    uploaded_json = st.file_uploader("Choose a file")
+      if uploaded_json is not None:
+        json_content = open(uploaded_json, 'r')
+        txt = st.text_area('Copy this to your streamlit app\'s secrets:', value = json_content )
+      
+             
+  else:
+    db = firestore.Client.from_service_account_json("firestore-key.json")
 
-    ###
-    save_1 = st.form_submit_button("Save")
-    if save_1:
-      with open('initial_config.py', 'w') as f:
-        l1 = 'project_title = \'' + project_title + '\'\n'
-        l2 = 'project_description = \'' + project_description + '\'\n'
-        l3 = 'inclusion_criteria = \'' + inclusion_criteria + '\'\n'
-        criteria = criteria.split('\n')
-        critlist = 'criteria = ['
-        last_item = criteria[-1]
-        for criterion in criteria:
-          if criterion != last_item:
-            critlist = critlist + '\'' + criterion + '\', '
-          if criterion == last_item:
-            critlist = critlist + '\'' + criterion + '\']\n'
-        l4 = critlist
-        l5 = 'firestore_collection = \'' + firestore_collection + '\'\n'
-        l6 = 'firestore_collection_users = \'' + firestore_collection + '_users\'\n'
-        f.writelines([l1, l2, l3, l4, l5, l6])
+    with st.form("form_1"):
+      project_title = st.text_input('Project title', '...')
+      project_description = st.text_area('Project description', '...')
+      st.divider()
+      inclusion_criteria = st.text_area('Inclusion criteria', 'Note them down here to have them in the assessment interface.')
+      criteria = st.text_area('Assessment criteria', 'one\nper\nline')
+      st.divider()
+      firestore_collection = st.text_input('Firestore collection', '')
       ###
-      df_as_dict = papers_df.to_dict('index')
-      with st.spinner('Wait for it...'):
-        fscu = firestore_collection + '_users'
-        user_ref = db.collection(fscu).document(new_user)
-        user_data = {'password': new_password, 'permissions': 'rw'}
-        user_ref.set(user_data)
-        for key, item in df_as_dict.items():
-          doc_ref = db.collection(firestore_collection).document(item['Key'])
-          doc_ref.set(item)
-      st.success('Done!')
+      st.divider()
+      st.subheader('Here we create a user with read and write rights on your data.')
+      new_user = st.text_input('Username')
+      new_password = st.text_input('Password')
+      st.info('Note down your password as for the time being I did not develop a password recovery tool!')
+      st.divider()
       ###
-      user = st.secrets['github_user']
-      token = st.secrets['github_token']
-      repo = st.secrets['github_repo']
-      gitpush.git_save('initial_config.py', user, token, repo)
+      st.subheader('Upload the CSV file containing your papers to be assessed.')
+      st.write('The file should contain at least the following columns to function properly: Key (unique identifier), Publication Year, Author, Title.')
+      st.write('The code is tested and optimized for Zotero collection exports.')
+      uploaded_file = st.file_uploader("Choose a file")
+      if uploaded_file is not None:
+        papers_df = pd.read_csv(uploaded_file)
+        st.write(papers_df)
+      ###
+
+      ###
+      save_1 = st.form_submit_button("Save")
+      if save_1:
+        with open('initial_config.py', 'w') as f:
+          l1 = 'project_title = \'' + project_title + '\'\n'
+          l2 = 'project_description = \'' + project_description + '\'\n'
+          l3 = 'inclusion_criteria = \'' + inclusion_criteria + '\'\n'
+          criteria = criteria.split('\n')
+          critlist = 'criteria = ['
+          last_item = criteria[-1]
+          for criterion in criteria:
+            if criterion != last_item:
+              critlist = critlist + '\'' + criterion + '\', '
+            if criterion == last_item:
+              critlist = critlist + '\'' + criterion + '\']\n'
+          l4 = critlist
+          l5 = 'firestore_collection = \'' + firestore_collection + '\'\n'
+          l6 = 'firestore_collection_users = \'' + firestore_collection + '_users\'\n'
+          f.writelines([l1, l2, l3, l4, l5, l6])
+        ###
+        df_as_dict = papers_df.to_dict('index')
+        with st.spinner('Wait for it...'):
+          fscu = firestore_collection + '_users'
+          user_ref = db.collection(fscu).document(new_user)
+          user_data = {'password': new_password, 'permissions': 'rw'}
+          user_ref.set(user_data)
+          for key, item in df_as_dict.items():
+            doc_ref = db.collection(firestore_collection).document(item['Key'])
+            doc_ref.set(item)
+        st.success('Done!')
+        ###
+        user = st.secrets['github_user']
+        token = st.secrets['github_token']
+        repo = st.secrets['github_repo']
+        gitpush.git_save('initial_config.py', user, token, repo)
 
 else:
   ################### with everything configured###################
