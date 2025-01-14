@@ -60,7 +60,7 @@ if 'initial_config.py' not in config_files:
       project_description = st.text_area('Project description', '', help = 'Any other information to let users understand what the project is about. Displayed on the top of the page, below the title. Ideally no more than 2-3 lines of text.')
       st.divider()
       inclusion_criteria = st.text_area('Inclusion criteria', 'Note them down here to have them in the assessment interface.', help = 'e.g.: - full text is available AND -full text mentions social listening or infodemic management AND -full text mentions outbreak, epidemic, pandemic OR -full text mentions public health, risk for public health, public health emergency, AND -full text mentions ethics or ethical aspects AND -full text in English.')
-      criteria = st.text_area('Assessment criteria', 'one\nper\nline', help = 'e.g.: -characterization of infodemic; -characterization of infodemic management; -ethical issues in infodemics; ...')
+      assessment_criteria = st.text_area('Assessment criteria', 'one\nper\nline', help = 'e.g.: -characterization of infodemic; -characterization of infodemic management; -ethical issues in infodemics; ...')
       st.divider()
       firestore_collection = st.text_input('Firestore collection', '', help = 'No spaces, no special characters. e.g.: infodemics-review-31052023')
       ###
@@ -86,11 +86,12 @@ if 'initial_config.py' not in config_files:
         with open('initial_config.py', 'w') as f:
           l1 = 'project_title = \'' + project_title + '\'\n'
           l2 = 'project_description = \'' + project_description + '\'\n'
+          inclusion_criteria = inclusion_criteria.replace('\n', '; ')
           l3 = 'inclusion_criteria = \'' + inclusion_criteria + '\'\n'
-          criteria = criteria.split('\n')
+          assessment_criteria = assessment_criteria.split('\n')
           critlist = 'criteria = ['
-          last_item = criteria[-1]
-          for criterion in criteria:
+          last_item = assessment_criteria[-1]
+          for criterion in assessment_criteria:
             if criterion != last_item:
               critlist = critlist + '\'' + criterion + '\', '
             if criterion == last_item:
