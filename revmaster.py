@@ -123,6 +123,7 @@ else:
 
   #####main#####
   import initial_config
+  db = firestore.Client.from_service_account_json('auth.json')
   ###
   st.set_page_config(page_title = 'RevMaster', page_icon = ':books:', layout = 'wide')
   st.header(initial_config.project_title)
